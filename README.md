@@ -23,11 +23,6 @@ O sistema deve ser composto por no mínimo 4 objetos(módulos do sistema):
 * Cada painel deve apresentar a senha a atendida (mais destacado) e o histórico das últimas senhas atendidas;
 * Deve ser implementado usando Java RMI.
 
-### O que deve ser entregue:
-* Código fonte
-* Diagrama de classes
-* Diagrama de sequencia
-
 # Avaliação e Datas de Entrega
 * Entregar via Github Classroom o código fonte do trabalho, conforme cronograma de entregas abaixo:
   - a cada aula destinada ao desenvolvimento do trabalho, deve ser feito um commit
