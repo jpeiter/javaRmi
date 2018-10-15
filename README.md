@@ -4,7 +4,7 @@
 # Trabalho 3
 
 ## Visão Geral
-O trabalho consiste da implementação de uma  *Si*stema de *G*erenciamento do *A*tendimento (SiGA) usando Java RMI.
+O trabalho consiste da implementação de uma  **Si**stema de **G**erenciamento do **A**tendimento (**SiGA**) usando Java RMI.
 
 O SiGA deve oferecer o controle de filas de atendimento através de emissão de senhas e chamada das mesmas através de painéis.
 
