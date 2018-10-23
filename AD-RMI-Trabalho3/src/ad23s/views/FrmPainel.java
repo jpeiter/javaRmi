@@ -16,6 +16,9 @@ public class FrmPainel extends javax.swing.JFrame {
      */
     public FrmPainel() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        lblSenhaAtual.setText("B888");
+        lblGuiche.setText("001");
     }
 
     /**
@@ -32,8 +35,8 @@ public class FrmPainel extends javax.swing.JFrame {
         lblSenhaAtual = new javax.swing.JLabel();
         lblSenha = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
+        jlabel1 = new javax.swing.JLabel();
         lblGuiche = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -41,6 +44,7 @@ public class FrmPainel extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         jPanel3.setBackground(new java.awt.Color(19, 14, 14));
 
@@ -76,16 +80,16 @@ public class FrmPainel extends javax.swing.JFrame {
 
         jPanel4.setBackground(new java.awt.Color(19, 14, 14));
 
-        lblGuiche.setBackground(new java.awt.Color(255, 255, 255));
-        lblGuiche.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
-        lblGuiche.setForeground(new java.awt.Color(247, 247, 247));
-        lblGuiche.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblGuiche.setText("GUICHÊ");
+        jlabel1.setBackground(new java.awt.Color(255, 255, 255));
+        jlabel1.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
+        jlabel1.setForeground(new java.awt.Color(247, 247, 247));
+        jlabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jlabel1.setText("GUICHÊ");
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 100)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 0, 0));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText(" ");
+        lblGuiche.setFont(new java.awt.Font("Tahoma", 0, 100)); // NOI18N
+        lblGuiche.setForeground(new java.awt.Color(255, 0, 0));
+        lblGuiche.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblGuiche.setText(" ");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -94,17 +98,17 @@ public class FrmPainel extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblGuiche, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 332, Short.MAX_VALUE))
+                    .addComponent(lblGuiche, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jlabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 332, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lblGuiche)
+                .addComponent(jlabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(lblGuiche, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -217,7 +221,6 @@ public class FrmPainel extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
@@ -225,6 +228,7 @@ public class FrmPainel extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel jlabel1;
     private javax.swing.JLabel lblGuiche;
     private javax.swing.JLabel lblSenha;
     private javax.swing.JLabel lblSenhaAtual;

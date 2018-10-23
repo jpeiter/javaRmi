@@ -30,7 +30,7 @@ public class FrmGuiche extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         btnPref = new javax.swing.JButton();
-        btnPremier = new javax.swing.JButton();
+        btnVIP = new javax.swing.JButton();
         btnConve = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -38,13 +38,13 @@ public class FrmGuiche extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Seleção de atendimento");
 
-        btnPref.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ad23s/icones/32x32/Office-Girl-icon (Custom).png"))); // NOI18N
+        btnPref.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ad23s/images/Office-Girl-icon (Custom).png"))); // NOI18N
         btnPref.setText("Preferencial");
 
-        btnPremier.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ad23s/icones/32x32/User-Executive-Red-icon (Custom).png"))); // NOI18N
-        btnPremier.setText("Premium  ");
+        btnVIP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ad23s/images/User-Executive-Red-icon (Custom)_1.png"))); // NOI18N
+        btnVIP.setText("VIP      ");
 
-        btnConve.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ad23s/icones/32x32/Chat-icon (Custom).png"))); // NOI18N
+        btnConve.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ad23s/images/Chat-icon (Custom).png"))); // NOI18N
         btnConve.setText("Convencional");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -55,7 +55,7 @@ public class FrmGuiche extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnConve, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnPremier, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnVIP, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnPref, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(82, 82, 82))
         );
@@ -67,7 +67,7 @@ public class FrmGuiche extends javax.swing.JFrame {
                 .addGap(29, 29, 29)
                 .addComponent(btnPref, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28)
-                .addComponent(btnPremier, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnVIP, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -147,7 +147,7 @@ public class FrmGuiche extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnConve;
     private javax.swing.JButton btnPref;
-    private javax.swing.JButton btnPremier;
+    private javax.swing.JButton btnVIP;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
