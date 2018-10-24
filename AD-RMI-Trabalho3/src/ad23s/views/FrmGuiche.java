@@ -37,6 +37,7 @@ public class FrmGuiche extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Seleção de atendimento");
+        setResizable(false);
 
         btnPref.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ad23s/images/Office-Girl-icon (Custom).png"))); // NOI18N
         btnPref.setText("Preferencial");
