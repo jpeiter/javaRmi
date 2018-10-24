@@ -44,6 +44,7 @@ public class FrmPainel extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Guichê");
         setResizable(false);
 
         jPanel3.setBackground(new java.awt.Color(19, 14, 14));
