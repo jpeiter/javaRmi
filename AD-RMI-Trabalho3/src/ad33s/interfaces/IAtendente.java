@@ -1,6 +1,6 @@
-package ad23s.interfaces;
+package ad33s.interfaces;
 
-import ad23s.model.SolicitacaoServico;
+import ad33s.model.SolicitacaoServico;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 

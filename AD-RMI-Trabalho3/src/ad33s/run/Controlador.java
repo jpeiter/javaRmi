@@ -1,8 +1,8 @@
-package ad23s.run;
+package ad33s.run;
 
-import ad23s.impl.AtendenteImpl;
-import ad23s.interfaces.IAtendente;
-import ad23s.model.SolicitacaoServico;
+import ad33s.impl.AtendenteImpl;
+import ad33s.interfaces.IAtendente;
+import ad33s.model.SolicitacaoServico;
 import java.rmi.AlreadyBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;

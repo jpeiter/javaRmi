@@ -1,4 +1,4 @@
-package ad23s.model;
+package ad33s.model;
 
 /**
  *
