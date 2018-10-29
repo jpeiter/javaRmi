@@ -1,5 +1,7 @@
 package ad33s.model;
 
+import ad33s.interfaces.ICallback;
+
 /**
  *
  * @author jpeit
@@ -12,12 +14,20 @@ public class Atendente {
     public Atendente() {
     }
 
-    public String getSenha() {
+    public String getNome() {
         return nome;
     }
 
-    public void setSenha(String nome) {
+    public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public ICallback getCallback() {
+        return callback;
+    }
+
+    public void setCallback(ICallback callback) {
+        this.callback = callback;
     }
 
 }
