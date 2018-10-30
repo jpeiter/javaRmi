@@ -18,7 +18,7 @@ public class FrmPainel extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         lblSenhaAtual.setText("B888");
-        lblGuiche.setText("001");
+        lblAtendente.setText("001");
     }
 
     /**
@@ -36,7 +36,7 @@ public class FrmPainel extends javax.swing.JFrame {
         lblSenha = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jlabel1 = new javax.swing.JLabel();
-        lblGuiche = new javax.swing.JLabel();
+        lblAtendente = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -85,12 +85,12 @@ public class FrmPainel extends javax.swing.JFrame {
         jlabel1.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
         jlabel1.setForeground(new java.awt.Color(247, 247, 247));
         jlabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jlabel1.setText("GUICHÊ");
+        jlabel1.setText("ATENDENTE");
 
-        lblGuiche.setFont(new java.awt.Font("Tahoma", 0, 100)); // NOI18N
-        lblGuiche.setForeground(new java.awt.Color(255, 0, 0));
-        lblGuiche.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblGuiche.setText(" ");
+        lblAtendente.setFont(new java.awt.Font("Tahoma", 0, 100)); // NOI18N
+        lblAtendente.setForeground(new java.awt.Color(255, 0, 0));
+        lblAtendente.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblAtendente.setText(" ");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -99,7 +99,7 @@ public class FrmPainel extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblGuiche, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblAtendente, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jlabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 332, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -109,7 +109,7 @@ public class FrmPainel extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jlabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblGuiche, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(lblAtendente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -230,7 +230,7 @@ public class FrmPainel extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel jlabel1;
-    private javax.swing.JLabel lblGuiche;
+    private javax.swing.JLabel lblAtendente;
     private javax.swing.JLabel lblSenha;
     private javax.swing.JLabel lblSenhaAtual;
     private javax.swing.JList<String> lstChamas;

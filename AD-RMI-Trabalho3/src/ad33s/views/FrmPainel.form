@@ -143,7 +143,7 @@
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="lblGuiche" alignment="1" max="32767" attributes="0"/>
+                          <Component id="lblAtendente" alignment="1" max="32767" attributes="0"/>
                           <Component id="jlabel1" alignment="1" pref="332" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -156,7 +156,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jlabel1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="lblGuiche" max="32767" attributes="0"/>
+                      <Component id="lblAtendente" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -174,10 +174,10 @@
                   <Color blue="f7" green="f7" red="f7" type="rgb"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="text" type="java.lang.String" value="GUICH&#xca;"/>
+                <Property name="text" type="java.lang.String" value="ATENDENTE"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="lblGuiche">
+            <Component class="javax.swing.JLabel" name="lblAtendente">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="100" style="0"/>
