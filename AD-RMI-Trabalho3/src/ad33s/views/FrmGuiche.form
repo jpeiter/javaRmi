@@ -74,26 +74,35 @@
         <Component class="javax.swing.JButton" name="btnPref">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/ad23s/images/Office-Girl-icon (Custom).png"/>
+              <Image iconType="3" name="/ad33s/images/Office-Girl-icon (Custom).png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Preferencial"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPrefActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnVIP">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/ad23s/images/User-Executive-Red-icon (Custom)_1.png"/>
+              <Image iconType="3" name="/ad33s/images/User-Executive-Red-icon (Custom).png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="VIP      "/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnVIPActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnConve">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/ad23s/images/Chat-icon (Custom).png"/>
+              <Image iconType="3" name="/ad33s/images/Administrator-icon2 (Custom)_1.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Convencional"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnConveActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

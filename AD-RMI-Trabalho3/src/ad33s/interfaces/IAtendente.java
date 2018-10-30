@@ -1,6 +1,5 @@
 package ad33s.interfaces;
 
-import ad33s.model.Guiche;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
@@ -10,6 +9,6 @@ import java.rmi.RemoteException;
  */
 public interface IAtendente extends Remote {
 
-    public Guiche chamaSenha(Guiche solicitacaoServico) throws RemoteException;
+    public void chamaSenha(String servico) throws RemoteException;
 
 }

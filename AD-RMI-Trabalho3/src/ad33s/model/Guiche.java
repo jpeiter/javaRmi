@@ -7,24 +7,14 @@ package ad33s.model;
 public class Guiche {
 
     private static final String[] SERVICOS = {"Convencional", "Preferencial", "VIP"};
-    
-    private int numeroGuiche;
 
-    private String senha;
+    private int numeroGuiche;
 
     public Guiche() {
     }
 
     public String[] getSERVICOS() {
         return SERVICOS;
-    }
-
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
     }
 
     public int getNumeroGuiche() {
@@ -34,7 +24,5 @@ public class Guiche {
     public void setNumeroGuiche(int numeroGuiche) {
         this.numeroGuiche = numeroGuiche;
     }
-    
-    
 
 }

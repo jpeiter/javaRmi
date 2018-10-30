@@ -5,17 +5,34 @@
  */
 package ad33s.views;
 
+import ad33s.interfaces.IGuiche;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author joao_
  */
 public class FrmGuiche extends javax.swing.JFrame {
 
-    /**
-     * Creates new form FrmGuiche
-     */
+    private IGuiche controlador;
+
     public FrmGuiche() {
         initComponents();
+        try {
+            Registry registry = LocateRegistry.getRegistry(1500);
+            controlador = (IGuiche) registry.lookup("Controlador");
+        } catch (RemoteException ex) {
+            Logger.getLogger(FrmGuiche.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NotBoundException ex) {
+            Logger.getLogger(FrmGuiche.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         this.setLocationRelativeTo(null);
     }
 
@@ -39,14 +56,29 @@ public class FrmGuiche extends javax.swing.JFrame {
         setTitle("Seleção de Atendimento");
         setResizable(false);
 
-        btnPref.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ad23s/images/Office-Girl-icon (Custom).png"))); // NOI18N
+        btnPref.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ad33s/images/Office-Girl-icon (Custom).png"))); // NOI18N
         btnPref.setText("Preferencial");
+        btnPref.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPrefActionPerformed(evt);
+            }
+        });
 
-        btnVIP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ad23s/images/User-Executive-Red-icon (Custom)_1.png"))); // NOI18N
+        btnVIP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ad33s/images/User-Executive-Red-icon (Custom).png"))); // NOI18N
         btnVIP.setText("VIP      ");
+        btnVIP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVIPActionPerformed(evt);
+            }
+        });
 
-        btnConve.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ad23s/images/Chat-icon (Custom).png"))); // NOI18N
+        btnConve.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ad33s/images/Administrator-icon2 (Custom)_1.png"))); // NOI18N
         btnConve.setText("Convencional");
+        btnConve.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConveActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -109,6 +141,21 @@ public class FrmGuiche extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnConveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConveActionPerformed
+        String senha = controlador.solicitaSenha("Convencional");
+        JOptionPane.showMessageDialog(null, "Sua senha é a " + senha + ".\nPor favor, aguarde atendimento.");
+    }//GEN-LAST:event_btnConveActionPerformed
+
+    private void btnPrefActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrefActionPerformed
+        String senha = controlador.solicitaSenha("Preferencial");
+        JOptionPane.showMessageDialog(null, "Sua senha é a " + senha + ".\nPor favor, aguarde atendimento.");
+    }//GEN-LAST:event_btnPrefActionPerformed
+
+    private void btnVIPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVIPActionPerformed
+        String senha = controlador.solicitaSenha("VIP");
+        JOptionPane.showMessageDialog(null, "Sua senha é a " + senha + ".\nPor favor, aguarde atendimento.");
+    }//GEN-LAST:event_btnVIPActionPerformed
 
     /**
      * @param args the command line arguments
