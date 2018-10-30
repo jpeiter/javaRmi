@@ -4,13 +4,15 @@ package ad33s.model;
  *
  * @author jpeit
  */
-public class SolicitacaoServico {
+public class Guiche {
 
     private static final String[] SERVICOS = {"Convencional", "Preferencial", "VIP"};
+    
+    private int numeroGuiche;
 
     private String senha;
 
-    public SolicitacaoServico() {
+    public Guiche() {
     }
 
     public String[] getSERVICOS() {
@@ -24,5 +26,15 @@ public class SolicitacaoServico {
     public void setSenha(String senha) {
         this.senha = senha;
     }
+
+    public int getNumeroGuiche() {
+        return numeroGuiche;
+    }
+
+    public void setNumeroGuiche(int numeroGuiche) {
+        this.numeroGuiche = numeroGuiche;
+    }
+    
+    
 
 }
