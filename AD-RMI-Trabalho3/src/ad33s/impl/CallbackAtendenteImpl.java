@@ -19,6 +19,11 @@ public class CallbackAtendenteImpl extends UnicastRemoteObject implements ICallb
         super();
     }
 
+    public CallbackAtendenteImpl() throws RemoteException{
+        super();
+    }
+
+    
     @Override
     public void atualizarSenha(String servico) {
         System.out.println("Senha atualizada");
