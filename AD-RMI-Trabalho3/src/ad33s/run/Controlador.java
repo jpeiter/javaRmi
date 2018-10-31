@@ -1,9 +1,9 @@
 package ad33s.run;
 
 import ad33s.impl.AtendenteImpl;
+import ad33s.impl.CallbackAtendenteImpl;
 import ad33s.interfaces.IAtendente;
-import ad33s.interfaces.IGuiche;
-import ad33s.model.Atendente;
+import ad33s.interfaces.ICallbackAtendente;
 import ad33s.model.Guiche;
 import java.rmi.AlreadyBoundException;
 import java.rmi.RemoteException;
@@ -20,11 +20,15 @@ public class Controlador {
 
     Registry registry = null;
     List<Guiche> listaSenhas = new ArrayList<>();
+    IAtendente atendente;
 
     public Controlador(String ip, int porta) {
         try {
             registry = LocateRegistry.createRegistry(1053);
-
+            atendente = (IAtendente) registry.lookup("Atendente");
+            
+            ICallbackAtendente callback = new CallbackAtendenteImpl();
+            
         } catch (Exception e) {
             System.out.println("Erro:" + e);
         }
