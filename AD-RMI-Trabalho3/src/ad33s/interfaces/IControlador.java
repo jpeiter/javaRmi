@@ -21,5 +21,5 @@ public interface IControlador extends Remote {
     public String solicitarSenha(String servico) throws RemoteException;
 
     public int atenderSenha(String servico) throws RemoteException;
-;
+
 }

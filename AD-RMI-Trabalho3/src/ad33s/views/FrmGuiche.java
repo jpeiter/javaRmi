@@ -26,20 +26,18 @@ public class FrmGuiche extends javax.swing.JFrame {
 
     public FrmGuiche() {
         initComponents();
-        
         guiche = new Guiche();
 
         try {
-
             Registry registro = LocateRegistry.getRegistry(1053);
             controlador = (IControlador) registro.lookup("Controlador");
-
-            this.setLocationRelativeTo(null);
         } catch (RemoteException ex) {
             System.out.println(ex);
         } catch (NotBoundException e) {
             System.out.println("Objeto não encontrado: " + e.getMessage());
         }
+
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -149,31 +147,15 @@ public class FrmGuiche extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnConveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConveActionPerformed
-        try {
-            String aa= guiche.getSERVICOS()[0];
-            String senha = controlador.solicitarSenha(aa);
-            JOptionPane.showMessageDialog(null, "Sua senha é: " + senha);
-        } catch (RemoteException ex) {
-            Logger.getLogger(FrmGuiche.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        chamaSenha(0);
     }//GEN-LAST:event_btnConveActionPerformed
 
     private void btnPrefActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrefActionPerformed
-        try {
-            String senha = controlador.solicitarSenha(new Guiche().getSERVICOS()[1]);
-            JOptionPane.showMessageDialog(null, "Sua senha é: " + senha);
-        } catch (RemoteException ex) {
-            Logger.getLogger(FrmGuiche.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        chamaSenha(1);
     }//GEN-LAST:event_btnPrefActionPerformed
 
     private void btnVIPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVIPActionPerformed
-        try {
-            String senha = controlador.solicitarSenha(new Guiche().getSERVICOS()[2]);
-            JOptionPane.showMessageDialog(null, "Sua senha é: " + senha);
-        } catch (RemoteException ex) {
-            Logger.getLogger(FrmGuiche.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        chamaSenha(2);
     }//GEN-LAST:event_btnVIPActionPerformed
 
     /**
@@ -187,7 +169,7 @@ public class FrmGuiche extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Metal".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -219,4 +201,14 @@ public class FrmGuiche extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables
+
+    private void chamaSenha(int numeroServico) {
+        try {
+            String senha = controlador.solicitarSenha(new Guiche().getSERVICOS()[numeroServico]);
+            JOptionPane.showMessageDialog(null, "Sua senha é: " + senha);
+        } catch (RemoteException ex) {
+            Logger.getLogger(FrmGuiche.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
 }

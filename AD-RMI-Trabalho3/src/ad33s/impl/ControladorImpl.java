@@ -112,5 +112,4 @@ public class ControladorImpl extends UnicastRemoteObject implements IControlador
             System.out.println("Já existe um objeto com esse nome registrado!!! " + ex.getMessage());
         }
     }
-
 }

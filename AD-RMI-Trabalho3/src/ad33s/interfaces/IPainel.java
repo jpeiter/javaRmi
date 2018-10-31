@@ -7,8 +7,8 @@ import java.rmi.RemoteException;
  *
  * @author jpeit
  */
-public interface IPainel extends Remote{
+public interface IPainel extends Remote {
 
-    public void atualizarPainel() throws RemoteException;;
+    public void atualizarPainel() throws RemoteException;
 
 }

@@ -27,7 +27,7 @@ public class AtendenteImpl extends UnicastRemoteObject implements IAtendente {
 
     @Override
     public void atualizarSenhas(String senha) throws RemoteException {
-        System.out.println("Atualizando senha atendente");
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

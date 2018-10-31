@@ -241,40 +241,15 @@ public class FrmAtendente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSenhaConvencionalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSenhaConvencionalActionPerformed
-        try {
-            queueSize = controlador.atenderSenha(new Guiche().getSERVICOS()[0]);
-            callback.atualizarSenha(new Guiche().getSERVICOS()[0]);
-            if (queueSize == 0 || queueSize == -1) {
-                JOptionPane.showMessageDialog(null, "Não há senhas a serem atendidas!");
-            }
-        } catch (RemoteException ex) {
-            Logger.getLogger(FrmAtendente.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
+        atendeSenha(0);
     }//GEN-LAST:event_btnSenhaConvencionalActionPerformed
 
     private void btnSenhaPreferencialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSenhaPreferencialActionPerformed
-        try {
-            queueSize = controlador.atenderSenha(new Guiche().getSERVICOS()[1]);
-            callback.atualizarSenha(new Guiche().getSERVICOS()[1]);
-            if (queueSize == 0 || queueSize == -1) {
-                JOptionPane.showMessageDialog(null, "Não há senhas a serem atendidas!");
-            }
-        } catch (RemoteException ex) {
-            Logger.getLogger(FrmAtendente.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        atendeSenha(1);
     }//GEN-LAST:event_btnSenhaPreferencialActionPerformed
 
     private void btnSenhaVIPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSenhaVIPActionPerformed
-        try {
-            queueSize = controlador.atenderSenha(new Guiche().getSERVICOS()[2]);
-            callback.atualizarSenha(new Guiche().getSERVICOS()[2]);
-            if (queueSize == 0 || queueSize == -1) {
-                JOptionPane.showMessageDialog(null, "Não há senhas a serem atendidas!");
-            }
-        } catch (RemoteException ex) {
-            Logger.getLogger(FrmAtendente.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        atendeSenha(2);
     }//GEN-LAST:event_btnSenhaVIPActionPerformed
 
     /**
@@ -288,7 +263,7 @@ public class FrmAtendente extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Metal".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -331,13 +306,16 @@ public class FrmAtendente extends javax.swing.JFrame {
     private javax.swing.JLabel lblAtendente;
     // End of variables declaration//GEN-END:variables
 
-    private void iniciaAtendente() {
+    private void atendeSenha(int numeroServico) {
         try {
-            ICallbackAtendente callback = new CallbackAtendenteImpl();
-            controlador.registrarAtendente("Atendente1", callback);
-
+            queueSize = controlador.atenderSenha(new Guiche().getSERVICOS()[numeroServico]);
+            callback.atualizarSenha(new Guiche().getSERVICOS()[numeroServico]);
+            if (queueSize == 0 || queueSize == -1) {
+                JOptionPane.showMessageDialog(null, "Não há senhas a serem atendidas!");
+            }
         } catch (RemoteException ex) {
-            System.out.println("RemoteException: " + ex.getMessage());
+            Logger.getLogger(FrmAtendente.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
 }

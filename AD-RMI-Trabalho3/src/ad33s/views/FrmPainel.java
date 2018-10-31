@@ -17,8 +17,6 @@ public class FrmPainel extends javax.swing.JFrame {
     public FrmPainel() {
         initComponents();
         this.setLocationRelativeTo(null);
-        lblSenhaAtual.setText("B888");
-        lblAtendente.setText("001");
     }
 
     /**
@@ -43,7 +41,7 @@ public class FrmPainel extends javax.swing.JFrame {
         lstChamadas = new javax.swing.JList<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Guichê");
+        setTitle("Painel de Senhas");
         setResizable(false);
 
         jPanel3.setBackground(new java.awt.Color(19, 14, 14));
@@ -189,7 +187,7 @@ public class FrmPainel extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Metal".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }

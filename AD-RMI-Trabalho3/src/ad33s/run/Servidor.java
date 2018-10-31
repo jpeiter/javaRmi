@@ -2,12 +2,9 @@ package ad33s.run;
 
 import ad33s.impl.ControladorImpl;
 import ad33s.interfaces.IControlador;
-import ad33s.model.Atendente;
 import java.rmi.AlreadyBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.*;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  *
@@ -17,9 +14,9 @@ public class Servidor {
 
     private Registry registro;
 
-    public Servidor(String ip, int porta) {
+    public Servidor(int porta) {
         try {
-            registro = LocateRegistry.createRegistry(1053);
+            registro = LocateRegistry.createRegistry(porta);
 
         } catch (Exception e) {
             System.out.println("Erro:" + e);
@@ -39,7 +36,7 @@ public class Servidor {
     }
 
     public static void main(String args[]) {
-        Servidor s = new Servidor("127.0.0.1", 1053);
+        Servidor s = new Servidor(1053);
         s.iniciar();
     }
 }
