@@ -6,6 +6,7 @@
 package ad33s.impl;
 
 import ad33s.interfaces.ICallbackAtendente;
+import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
 /**
@@ -14,9 +15,14 @@ import java.rmi.server.UnicastRemoteObject;
  */
 public class CallbackAtendenteImpl extends UnicastRemoteObject implements ICallbackAtendente{
 
+    public CallbackAtendenteImpl() throws RemoteException{
+        super();
+    }
+
+    
     @Override
-    public void atualizarSenha(String servico) {
-        
+    public void atualizarSenha(String servico) throws RemoteException{
+        System.out.println("");
     }
     
 }

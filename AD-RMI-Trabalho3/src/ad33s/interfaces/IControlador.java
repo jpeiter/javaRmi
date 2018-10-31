@@ -5,17 +5,20 @@
  */
 package ad33s.interfaces;
 
+import java.rmi.Remote;
 import java.rmi.RemoteException;
 
 /**
  *
  * @author joao_
  */
-public interface IControlador {
+public interface IControlador extends Remote{
     public void registrarAtendente(String nome, ICallbackAtendente callback)
             throws RemoteException;
     public void registrarPainel(String nome, ICallbackPainel callback)
             throws RemoteException;
-    public String solicitarSenha(String servico);
-    public void atenderSenha(String serviço);
+    public String solicitarSenha(String servico)
+            throws RemoteException;
+    public void atenderSenha(String serviço)
+            throws RemoteException;
 }

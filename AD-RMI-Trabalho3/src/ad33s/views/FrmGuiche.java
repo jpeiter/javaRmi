@@ -142,17 +142,17 @@ public class FrmGuiche extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnConveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConveActionPerformed
-        String senha = controlador.solicitaSenha("Convencional");
+//        String senha = controlador.solicitaSenha("Convencional");
         JOptionPane.showMessageDialog(null, "Sua senha é a " + senha + ".\nPor favor, aguarde atendimento.");
     }//GEN-LAST:event_btnConveActionPerformed
 
     private void btnPrefActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrefActionPerformed
-        String senha = controlador.solicitaSenha("Preferencial");
+//        String senha = controlador.solicitaSenha("Preferencial");
         JOptionPane.showMessageDialog(null, "Sua senha é a " + senha + ".\nPor favor, aguarde atendimento.");
     }//GEN-LAST:event_btnPrefActionPerformed
 
     private void btnVIPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVIPActionPerformed
-        String senha = controlador.solicitaSenha("VIP");
+//        String senha = controlador.solicitaSenha("VIP");
         JOptionPane.showMessageDialog(null, "Sua senha é a " + senha + ".\nPor favor, aguarde atendimento.");
     }//GEN-LAST:event_btnVIPActionPerformed
 
