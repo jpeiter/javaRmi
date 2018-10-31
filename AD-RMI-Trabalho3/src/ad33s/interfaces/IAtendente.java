@@ -9,6 +9,6 @@ import java.rmi.RemoteException;
  */
 public interface IAtendente extends Remote {
 
-    public void atualizarSenhas() throws RemoteException;
+    public void atualizarSenhas(String senha) throws RemoteException;
 
 }

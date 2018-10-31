@@ -1,6 +1,6 @@
 package ad33s.model;
 
-import ad33s.interfaces.ICallback;
+import ad33s.interfaces.ICallbackAtendente;
 
 /**
  *
@@ -9,7 +9,7 @@ import ad33s.interfaces.ICallback;
 public class Atendente {
 
     private String nome;
-    private ICallback callback;
+    private ICallbackAtendente callback;
 
     public Atendente() {
     }
@@ -22,11 +22,11 @@ public class Atendente {
         this.nome = nome;
     }
 
-    public ICallback getCallback() {
+    public ICallbackAtendente getCallback() {
         return callback;
     }
 
-    public void setCallback(ICallback callback) {
+    public void setCallback(ICallbackAtendente callback) {
         this.callback = callback;
     }
 
