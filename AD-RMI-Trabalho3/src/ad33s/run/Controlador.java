@@ -2,6 +2,8 @@ package ad33s.run;
 
 import ad33s.impl.AtendenteImpl;
 import ad33s.interfaces.IAtendente;
+import ad33s.interfaces.IGuiche;
+import ad33s.model.Atendente;
 import ad33s.model.Guiche;
 import java.rmi.AlreadyBoundException;
 import java.rmi.RemoteException;
@@ -32,6 +34,17 @@ public class Controlador {
         try {
             IAtendente atendente = new AtendenteImpl(listaSenhas, registry);
             registry.bind("Controlador", atendente);
+            System.out.println("Controlador está executando.");
+        } catch (RemoteException ex) {
+            System.out.println("RemoteException: " + ex.getMessage());
+        } catch (AlreadyBoundException ex) {
+            System.out.println("Já existe um objeto com esse nome registrado!!! " + ex.getMessage());
+        }
+    }
+
+    public void registrarPainel() {
+        try {
+            IPainel painel = new PainelImpl()
             System.out.println("Controlador está executando.");
         } catch (RemoteException ex) {
             System.out.println("RemoteException: " + ex.getMessage());
