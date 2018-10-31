@@ -5,6 +5,16 @@
  */
 package ad33s.views;
 
+import ad33s.impl.CallbackAtendenteImpl;
+import ad33s.interfaces.ICallbackAtendente;
+import ad33s.interfaces.IControlador;
+import ad33s.model.Guiche;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -16,13 +26,29 @@ public class FrmAtendente extends javax.swing.JFrame {
     /**
      * Creates new form FrmAtendente
      */
+    private IControlador controlador;
+    private ICallbackAtendente callback;
+    private int queueSize;
+
     public FrmAtendente() {
-        //Pedir o nome do atendente e setar no "lblAtendente"
         initComponents();
+        //Pedir o nome do atendente e setar no "lblAtendente"
         String nome = JOptionPane.showInputDialog(null, "Nome do atendente", "Atendente", JOptionPane.INFORMATION_MESSAGE);
-        
-        lblAtendente.setText(!nome.isEmpty() ? nome : "Joaquim");
-        
+
+        try {
+            Registry registro = LocateRegistry.getRegistry(1053);
+            controlador = (IControlador) registro.lookup("Controlador");
+
+            callback = new CallbackAtendenteImpl();
+            controlador.registrarAtendente(nome, callback);
+        } catch (RemoteException ex) {
+            System.out.println("RemoteException: " + ex.getMessage());
+        } catch (NotBoundException e) {
+            System.out.println("Objeto não encontrado: " + e.getMessage());
+        }
+
+        lblAtendente.setText(!nome.isEmpty() ? nome : "Atendente");
+        System.out.println(nome + " registrado e atendendo...");
         this.setLocationRelativeTo(null);
     }
 
@@ -39,15 +65,18 @@ public class FrmAtendente extends javax.swing.JFrame {
         lblAtendente = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        lblPref = new javax.swing.JLabel();
+        counterPref = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        lblConv = new javax.swing.JLabel();
-        lblVip = new javax.swing.JLabel();
+        counterConv = new javax.swing.JLabel();
+        counterVip = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnSenhaConvencional = new javax.swing.JButton();
+        btnSenhaPreferencial = new javax.swing.JButton();
+        btnSenhaVIP = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Janela de Atendimento");
@@ -62,23 +91,32 @@ public class FrmAtendente extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel2.setText("Convencional:");
 
-        lblPref.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        lblPref.setForeground(new java.awt.Color(204, 0, 0));
-        lblPref.setText("000");
+        counterPref.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        counterPref.setForeground(new java.awt.Color(204, 0, 0));
+        counterPref.setText("000");
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel4.setText("V.I.P:");
 
-        lblConv.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        lblConv.setForeground(new java.awt.Color(204, 0, 0));
-        lblConv.setText("000");
+        counterConv.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        counterConv.setForeground(new java.awt.Color(204, 0, 0));
+        counterConv.setText("000");
 
-        lblVip.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        lblVip.setForeground(new java.awt.Color(204, 0, 0));
-        lblVip.setText("000");
+        counterVip.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        counterVip.setForeground(new java.awt.Color(204, 0, 0));
+        counterVip.setText("000");
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel6.setText("Preferencial:");
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel5.setText("na fila");
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel7.setText("na fila");
+
+        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel8.setText("na fila");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -88,13 +126,22 @@ public class FrmAtendente extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel6))
+                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblPref)
-                    .addComponent(lblVip)
-                    .addComponent(lblConv))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(counterPref)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel7))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(counterVip)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel8))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(counterConv)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel5)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -103,44 +150,62 @@ public class FrmAtendente extends javax.swing.JFrame {
                 .addGap(38, 38, 38)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(lblConv))
+                    .addComponent(counterConv)
+                    .addComponent(jLabel5))
                 .addGap(48, 48, 48)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(lblPref))
+                    .addComponent(counterPref)
+                    .addComponent(jLabel7))
                 .addGap(47, 47, 47)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(lblVip))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(counterVip)
+                    .addComponent(jLabel8))
+                .addContainerGap(55, Short.MAX_VALUE))
         );
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ad23s/images/Chat-icon (Custom).png"))); // NOI18N
-        jButton1.setText("Convencional");
+        btnSenhaConvencional.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ad33s/images/Chat-icon (Custom).png"))); // NOI18N
+        btnSenhaConvencional.setText("Convencional");
+        btnSenhaConvencional.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSenhaConvencionalActionPerformed(evt);
+            }
+        });
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ad23s/images/Office-Girl-icon (Custom).png"))); // NOI18N
-        jButton2.setText("Preferencial");
+        btnSenhaPreferencial.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ad33s/images/Office-Girl-icon (Custom).png"))); // NOI18N
+        btnSenhaPreferencial.setText("Preferencial");
+        btnSenhaPreferencial.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSenhaPreferencialActionPerformed(evt);
+            }
+        });
 
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ad23s/images/User-Executive-Red-icon (Custom).png"))); // NOI18N
-        jButton3.setText("V.I.P      ");
+        btnSenhaVIP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ad33s/images/User-Executive-Red-icon (Custom).png"))); // NOI18N
+        btnSenhaVIP.setText("V.I.P");
+        btnSenhaVIP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSenhaVIPActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE)
-            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btnSenhaConvencional, javax.swing.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE)
+            .addComponent(btnSenhaPreferencial, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btnSenhaVIP, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(32, 32, 32)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnSenhaConvencional, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(33, 33, 33)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnSenhaPreferencial, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(31, 31, 31)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnSenhaVIP, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(46, Short.MAX_VALUE))
         );
 
@@ -153,11 +218,11 @@ public class FrmAtendente extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblAtendente)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(243, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -174,6 +239,43 @@ public class FrmAtendente extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnSenhaConvencionalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSenhaConvencionalActionPerformed
+        try {
+            queueSize = controlador.atenderSenha(new Guiche().getSERVICOS()[0]);
+            callback.atualizarSenha(new Guiche().getSERVICOS()[0]);
+            if (queueSize == 0 || queueSize == -1) {
+                JOptionPane.showMessageDialog(null, "Não há senhas a serem atendidas!");
+            }
+        } catch (RemoteException ex) {
+            Logger.getLogger(FrmAtendente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_btnSenhaConvencionalActionPerformed
+
+    private void btnSenhaPreferencialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSenhaPreferencialActionPerformed
+        try {
+            queueSize = controlador.atenderSenha(new Guiche().getSERVICOS()[1]);
+            callback.atualizarSenha(new Guiche().getSERVICOS()[1]);
+            if (queueSize == 0 || queueSize == -1) {
+                JOptionPane.showMessageDialog(null, "Não há senhas a serem atendidas!");
+            }
+        } catch (RemoteException ex) {
+            Logger.getLogger(FrmAtendente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnSenhaPreferencialActionPerformed
+
+    private void btnSenhaVIPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSenhaVIPActionPerformed
+        try {
+            queueSize = controlador.atenderSenha(new Guiche().getSERVICOS()[2]);
+            callback.atualizarSenha(new Guiche().getSERVICOS()[2]);
+            if (queueSize == 0 || queueSize == -1) {
+                JOptionPane.showMessageDialog(null, "Não há senhas a serem atendidas!");
+            }
+        } catch (RemoteException ex) {
+            Logger.getLogger(FrmAtendente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnSenhaVIPActionPerformed
 
     /**
      * @param args the command line arguments
@@ -211,18 +313,31 @@ public class FrmAtendente extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton btnSenhaConvencional;
+    private javax.swing.JButton btnSenhaPreferencial;
+    private javax.swing.JButton btnSenhaVIP;
+    private javax.swing.JLabel counterConv;
+    private javax.swing.JLabel counterPref;
+    private javax.swing.JLabel counterVip;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lblAtendente;
-    private javax.swing.JLabel lblConv;
-    private javax.swing.JLabel lblPref;
-    private javax.swing.JLabel lblVip;
     // End of variables declaration//GEN-END:variables
+
+    private void iniciaAtendente() {
+        try {
+            ICallbackAtendente callback = new CallbackAtendenteImpl();
+            controlador.registrarAtendente("Atendente1", callback);
+
+        } catch (RemoteException ex) {
+            System.out.println("RemoteException: " + ex.getMessage());
+        }
+    }
 }

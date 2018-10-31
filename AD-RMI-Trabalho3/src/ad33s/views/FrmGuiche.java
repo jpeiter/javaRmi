@@ -5,6 +5,8 @@
  */
 package ad33s.views;
 
+import ad33s.interfaces.IControlador;
+import ad33s.model.Guiche;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -19,20 +21,25 @@ import javax.swing.JOptionPane;
  */
 public class FrmGuiche extends javax.swing.JFrame {
 
-    private IGuiche controlador;
+    private Guiche guiche;
+    private IControlador controlador = null;
 
     public FrmGuiche() {
         initComponents();
-        try {
-            Registry registry = LocateRegistry.getRegistry(1500);
-            controlador = (IGuiche) registry.lookup("Controlador");
-        } catch (RemoteException ex) {
-            Logger.getLogger(FrmGuiche.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (NotBoundException ex) {
-            Logger.getLogger(FrmGuiche.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        
+        guiche = new Guiche();
 
-        this.setLocationRelativeTo(null);
+        try {
+
+            Registry registro = LocateRegistry.getRegistry(1053);
+            controlador = (IControlador) registro.lookup("Controlador");
+
+            this.setLocationRelativeTo(null);
+        } catch (RemoteException ex) {
+            System.out.println(ex);
+        } catch (NotBoundException e) {
+            System.out.println("Objeto não encontrado: " + e.getMessage());
+        }
     }
 
     /**
@@ -142,18 +149,31 @@ public class FrmGuiche extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnConveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConveActionPerformed
-        String senha = controlador.solicitaSenha("Convencional");
-        JOptionPane.showMessageDialog(null, "Sua senha é a " + senha + ".\nPor favor, aguarde atendimento.");
+        try {
+            String aa= guiche.getSERVICOS()[0];
+            String senha = controlador.solicitarSenha(aa);
+            JOptionPane.showMessageDialog(null, "Sua senha é: " + senha);
+        } catch (RemoteException ex) {
+            Logger.getLogger(FrmGuiche.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnConveActionPerformed
 
     private void btnPrefActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrefActionPerformed
-        String senha = controlador.solicitaSenha("Preferencial");
-        JOptionPane.showMessageDialog(null, "Sua senha é a " + senha + ".\nPor favor, aguarde atendimento.");
+        try {
+            String senha = controlador.solicitarSenha(new Guiche().getSERVICOS()[1]);
+            JOptionPane.showMessageDialog(null, "Sua senha é: " + senha);
+        } catch (RemoteException ex) {
+            Logger.getLogger(FrmGuiche.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnPrefActionPerformed
 
     private void btnVIPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVIPActionPerformed
-        String senha = controlador.solicitaSenha("VIP");
-        JOptionPane.showMessageDialog(null, "Sua senha é a " + senha + ".\nPor favor, aguarde atendimento.");
+        try {
+            String senha = controlador.solicitarSenha(new Guiche().getSERVICOS()[2]);
+            JOptionPane.showMessageDialog(null, "Sua senha é: " + senha);
+        } catch (RemoteException ex) {
+            Logger.getLogger(FrmGuiche.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnVIPActionPerformed
 
     /**
