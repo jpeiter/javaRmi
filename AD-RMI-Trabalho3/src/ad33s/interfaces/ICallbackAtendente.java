@@ -10,5 +10,6 @@ import java.rmi.RemoteException;
 public interface ICallbackAtendente extends Remote {
 
     public void atualizarSenha(String servico) throws RemoteException;
+    public void atualizaTamanhoFila(String tipo, int tamanho) throws RemoteException;
 
 }

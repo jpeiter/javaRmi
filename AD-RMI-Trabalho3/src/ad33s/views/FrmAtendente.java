@@ -39,7 +39,7 @@ public class FrmAtendente extends javax.swing.JFrame {
             Registry registro = LocateRegistry.getRegistry(1053);
             controlador = (IControlador) registro.lookup("Controlador");
 
-            callback = new CallbackAtendenteImpl();
+            callback = new CallbackAtendenteImpl(this);
             controlador.registrarAtendente(nome, callback);
         } catch (RemoteException ex) {
             System.out.println("RemoteException: " + ex.getMessage());
@@ -165,7 +165,6 @@ public class FrmAtendente extends javax.swing.JFrame {
                 .addContainerGap(55, Short.MAX_VALUE))
         );
 
-        btnSenhaConvencional.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ad33s/images/Chat-icon (Custom).png"))); // NOI18N
         btnSenhaConvencional.setText("Convencional");
         btnSenhaConvencional.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -173,7 +172,6 @@ public class FrmAtendente extends javax.swing.JFrame {
             }
         });
 
-        btnSenhaPreferencial.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ad33s/images/Office-Girl-icon (Custom).png"))); // NOI18N
         btnSenhaPreferencial.setText("Preferencial");
         btnSenhaPreferencial.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -181,7 +179,6 @@ public class FrmAtendente extends javax.swing.JFrame {
             }
         });
 
-        btnSenhaVIP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ad33s/images/User-Executive-Red-icon (Custom).png"))); // NOI18N
         btnSenhaVIP.setText("V.I.P");
         btnSenhaVIP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -316,6 +313,21 @@ public class FrmAtendente extends javax.swing.JFrame {
         } catch (RemoteException ex) {
             Logger.getLogger(FrmAtendente.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    public void atualizaTamanhoFila(String tipoFila, int tamanhoFila) {
+        switch (tipoFila) {
+            case "CONV":
+                counterConv.setText(String.valueOf(tamanhoFila));
+                break;
+            case "PREF":
+                counterPref.setText(String.valueOf(tamanhoFila));
+                break;
+            case "VIP":
+                counterVip.setText(String.valueOf(tamanhoFila));
+                break;
+                
+        }        
     }
 
 }

@@ -6,6 +6,7 @@ import ad33s.interfaces.ICallbackPainel;
 import ad33s.interfaces.IControlador;
 import ad33s.interfaces.IPainel;
 import java.rmi.AlreadyBoundException;
+import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
@@ -47,7 +48,7 @@ public class ControladorImpl extends UnicastRemoteObject implements IControlador
     @Override
     public void registrarAtendente(String nome, ICallbackAtendente callback) throws RemoteException {
         try {
-            atendente = new AtendenteImpl(listaSenhas, registry);
+            atendente = new AtendenteImpl(listaSenhas, registry, callback);
             registry.bind("Atendente " + nome, atendente);
             System.out.println("Atendente " + nome + " registrado.");
             listAtendentes.add(nome);
@@ -59,21 +60,33 @@ public class ControladorImpl extends UnicastRemoteObject implements IControlador
     }
 
     @Override
-    public String solicitarSenha(String servico) {
+    public String solicitarSenha(String servico) throws RemoteException, NotBoundException {
         StringBuilder sb = new StringBuilder();
         if (servico.equals("Convencional")) {
             sb.append(servico.charAt(0)).append(contadorConvencional++);
             listaSenhasConvencional.add(sb.toString());
+            for (String nome : listAtendentes) {
+                IAtendente atendente = (IAtendente) registry.lookup("Atendente " + nome);
+                atendente.atualizarTamanhoFila("CONV", listaSenhasConvencional.size());
+            }
         } else if (servico.equals("Preferencial")) {
             sb.append(servico.charAt(0)).append(contadorPreferencial++);
             listaSenhasPreferencial.add(sb.toString());
+            for (String nome : listAtendentes) {
+                IAtendente atendente = (IAtendente) registry.lookup("Atendente " + nome);
+                atendente.atualizarTamanhoFila("PREF", listaSenhasPreferencial.size());
+            }
         } else if (servico.equals("VIP")) {
             sb.append(servico.charAt(0)).append(contadorVIP++);
             listaSenhasVIP.add(sb.toString());
+            for (String nome : listAtendentes) {
+                IAtendente atendente = (IAtendente) registry.lookup("Atendente " + nome);
+                atendente.atualizarTamanhoFila("VIP", listaSenhasVIP.size());
+            }
         } else {
             return "SERVIÇO INCORRETO!";
         }
-        System.out.println("Senha " + servico + " " + sb.toString() + " chamada");
+        System.out.println("Senha " + servico + " " + sb.toString() + " chamada");                
         return sb.toString();
     }
 

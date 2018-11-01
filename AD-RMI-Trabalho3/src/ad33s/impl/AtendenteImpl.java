@@ -13,21 +13,28 @@ public class AtendenteImpl extends UnicastRemoteObject implements IAtendente {
     List<String> listaSenhasConvencional;
     List<String> listaSenhasPreferencial;
     List<String> listaSenhasVIP;
+    int tamanhoFila;
     Registry registry;
     ICallbackAtendente callback;
 
-    public AtendenteImpl(List<List> listaSenhas, Registry registry) throws RemoteException {
+    public AtendenteImpl(List<List> listaSenhas, Registry registry, ICallbackAtendente callback) throws RemoteException {
         super();
         this.listaSenhas = listaSenhas;
         this.listaSenhasConvencional = listaSenhas.get(0);
         this.listaSenhasPreferencial = listaSenhas.get(1);
         this.listaSenhasVIP = listaSenhas.get(2);
         this.registry = registry;
+        this.callback = callback;
     }
 
     @Override
     public void atualizarSenhas(String senha) throws RemoteException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void atualizarTamanhoFila(String tipo, int tamanho) throws RemoteException {
+        callback.atualizaTamanhoFila(tipo, tamanho);
     }
 
 }

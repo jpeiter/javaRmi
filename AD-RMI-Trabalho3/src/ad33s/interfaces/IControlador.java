@@ -5,6 +5,7 @@
  */
 package ad33s.interfaces;
 
+import java.rmi.NotBoundException;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
@@ -18,7 +19,7 @@ public interface IControlador extends Remote {
 
     public void registrarPainel(String nome, ICallbackPainel callback) throws RemoteException;
 
-    public String solicitarSenha(String servico) throws RemoteException;
+    public String solicitarSenha(String servico) throws RemoteException, NotBoundException;
 
     public int atenderSenha(String servico) throws RemoteException;
 

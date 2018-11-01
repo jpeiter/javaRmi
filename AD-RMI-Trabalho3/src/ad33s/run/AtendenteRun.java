@@ -23,13 +23,13 @@ public class AtendenteRun {
     }
 
     private void iniciar() {
-        try {
-            ICallbackAtendente callback = new CallbackAtendenteImpl();
-            controlador.registrarAtendente("Atendente1", callback);
+//        try {
+//            ICallbackAtendente callback = new CallbackAtendenteImpl();
+//            controlador.registrarAtendente("Atendente1", callback);
 
-        } catch (RemoteException ex) {
-            System.out.println("RemoteException: " + ex.getMessage());
-        }
+//        } catch (RemoteException ex) {
+//            System.out.println("RemoteException: " + ex.getMessage());
+//        }
     }
 
     public static void main(String[] args) {

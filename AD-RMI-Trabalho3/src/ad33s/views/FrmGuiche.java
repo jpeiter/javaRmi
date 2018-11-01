@@ -60,7 +60,6 @@ public class FrmGuiche extends javax.swing.JFrame {
         setTitle("Seleção de Atendimento");
         setResizable(false);
 
-        btnPref.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ad33s/images/Office-Girl-icon (Custom).png"))); // NOI18N
         btnPref.setText("Preferencial");
         btnPref.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -68,7 +67,6 @@ public class FrmGuiche extends javax.swing.JFrame {
             }
         });
 
-        btnVIP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ad33s/images/User-Executive-Red-icon (Custom).png"))); // NOI18N
         btnVIP.setText("VIP      ");
         btnVIP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -76,7 +74,6 @@ public class FrmGuiche extends javax.swing.JFrame {
             }
         });
 
-        btnConve.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ad33s/images/Administrator-icon2 (Custom)_1.png"))); // NOI18N
         btnConve.setText("Convencional");
         btnConve.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -206,7 +203,7 @@ public class FrmGuiche extends javax.swing.JFrame {
         try {
             String senha = controlador.solicitarSenha(new Guiche().getSERVICOS()[numeroServico]);
             JOptionPane.showMessageDialog(null, "Sua senha é: " + senha);
-        } catch (RemoteException ex) {
+        } catch (RemoteException | NotBoundException ex) {
             Logger.getLogger(FrmGuiche.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
