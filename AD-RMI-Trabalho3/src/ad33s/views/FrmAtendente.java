@@ -165,21 +165,21 @@ public class FrmAtendente extends javax.swing.JFrame {
                 .addContainerGap(55, Short.MAX_VALUE))
         );
 
-        btnSenhaConvencional.setText("Convencional");
+        btnSenhaConvencional.setText("Chamar Convencional");
         btnSenhaConvencional.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSenhaConvencionalActionPerformed(evt);
             }
         });
 
-        btnSenhaPreferencial.setText("Preferencial");
+        btnSenhaPreferencial.setText("Chamar Preferencial");
         btnSenhaPreferencial.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSenhaPreferencialActionPerformed(evt);
             }
         });
 
-        btnSenhaVIP.setText("V.I.P");
+        btnSenhaVIP.setText("Chamar V.I.P");
         btnSenhaVIP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSenhaVIPActionPerformed(evt);
@@ -305,8 +305,8 @@ public class FrmAtendente extends javax.swing.JFrame {
 
     private void atendeSenha(int numeroServico) {
         try {
-            queueSize = controlador.atenderSenha(new Guiche().getSERVICOS()[numeroServico]);
             callback.atualizarSenha(new Guiche().getSERVICOS()[numeroServico]);
+            queueSize = controlador.atenderSenha(new Guiche().getSERVICOS()[numeroServico]);
             if (queueSize == 0 || queueSize == -1) {
                 JOptionPane.showMessageDialog(null, "Não há senhas a serem atendidas!");
             }
@@ -314,7 +314,7 @@ public class FrmAtendente extends javax.swing.JFrame {
             Logger.getLogger(FrmAtendente.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     public void atualizaTamanhoFila(String tipoFila, int tamanhoFila) {
         switch (tipoFila) {
             case "CONV":
@@ -326,8 +326,8 @@ public class FrmAtendente extends javax.swing.JFrame {
             case "VIP":
                 counterVip.setText(String.valueOf(tamanhoFila));
                 break;
-                
-        }        
+
+        }
     }
 
 }

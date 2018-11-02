@@ -46,20 +46,6 @@ public class ControladorImpl extends UnicastRemoteObject implements IControlador
     }
 
     @Override
-    public void registrarAtendente(String nome, ICallbackAtendente callback) throws RemoteException {
-        try {
-            atendente = new AtendenteImpl(listaSenhas, registry, callback);
-            registry.bind("Atendente " + nome, atendente);
-            System.out.println("Atendente " + nome + " registrado.");
-            listAtendentes.add(nome);
-        } catch (RemoteException ex) {
-            System.out.println("RemoteException: " + ex.getMessage());
-        } catch (AlreadyBoundException ex) {
-            System.out.println("Já existe um objeto com esse nome registrado!!! " + ex.getMessage());
-        }
-    }
-
-    @Override
     public String solicitarSenha(String servico) throws RemoteException, NotBoundException {
         StringBuilder sb = new StringBuilder();
         if (servico.equals("Convencional")) {
@@ -86,7 +72,7 @@ public class ControladorImpl extends UnicastRemoteObject implements IControlador
         } else {
             return "SERVIÇO INCORRETO!";
         }
-        System.out.println("Senha " + servico + " " + sb.toString() + " chamada");                
+        System.out.println("Senha " + servico + " " + sb.toString() + " chamada");
         return sb.toString();
     }
 
@@ -95,14 +81,17 @@ public class ControladorImpl extends UnicastRemoteObject implements IControlador
         if ((!listaSenhasConvencional.isEmpty())
                 || (!listaSenhasPreferencial.isEmpty())
                 || (!listaSenhasVIP.isEmpty())) {
+
             if (servico.equals("Convencional")) {
                 System.out.println("Senha " + servico + listaSenhasConvencional.get(0) + " atendida.");
                 listaSenhasConvencional.remove(0);
                 return listaSenhasConvencional.size();
+
             } else if (servico.equals("Preferencial")) {
                 System.out.println("Senha " + servico + listaSenhasPreferencial.get(0) + " atendida.");
                 listaSenhasPreferencial.remove(0);
                 return listaSenhasPreferencial.size();
+
             } else {
                 System.out.println("Senha " + servico + listaSenhasVIP.get(0) + " atendida.");
                 listaSenhasVIP.remove(0);
@@ -114,15 +103,29 @@ public class ControladorImpl extends UnicastRemoteObject implements IControlador
     }
 
     @Override
-    public void registrarPainel(String nome, ICallbackPainel callback) throws RemoteException {
+    public void registrarAtendente(String nome, ICallbackAtendente callback) throws RemoteException {
         try {
-            painel = new PainelImpl(listaSenhas, registry);
+            atendente = new AtendenteImpl(listaSenhas, registry, callback);
             registry.bind("Atendente " + nome, atendente);
             System.out.println("Atendente " + nome + " registrado.");
+            listAtendentes.add(nome);
         } catch (RemoteException ex) {
             System.out.println("RemoteException: " + ex.getMessage());
         } catch (AlreadyBoundException ex) {
-            System.out.println("Já existe um objeto com esse nome registrado!!! " + ex.getMessage());
+            System.out.println("Já existe um atendente com esse nome registrado!!! " + ex.getMessage());
+        }
+    }
+
+    @Override
+    public void registrarPainel(String nome, ICallbackPainel callback) throws RemoteException {
+        try {
+            painel = new PainelImpl(listaSenhas, registry, callback);
+            registry.bind("Painel " + nome, painel);
+            System.out.println("Painel " + nome + " registrado.");
+        } catch (RemoteException ex) {
+            System.out.println("RemoteException: " + ex.getMessage());
+        } catch (AlreadyBoundException ex) {
+            System.out.println("Já existe um painel com esse nome registrado!!! " + ex.getMessage());
         }
     }
 }

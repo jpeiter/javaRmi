@@ -224,4 +224,9 @@ public class FrmPainel extends javax.swing.JFrame {
     private javax.swing.JLabel lblSenhaAtual;
     private javax.swing.JList<String> lstChamadas;
     // End of variables declaration//GEN-END:variables
+
+    private void atualizar() {
+
+    }
+
 }

@@ -15,7 +15,7 @@ import java.rmi.server.UnicastRemoteObject;
  * @author joao_
  */
 public class CallbackAtendenteImpl extends UnicastRemoteObject implements ICallbackAtendente {
-    
+
     private final FrmAtendente frmAtendente;
 
     public CallbackAtendenteImpl(FrmAtendente frmAtendente) throws RemoteException {
@@ -32,4 +32,5 @@ public class CallbackAtendenteImpl extends UnicastRemoteObject implements ICallb
     public void atualizaTamanhoFila(String tipoFila, int tamanho) throws RemoteException {
         frmAtendente.atualizaTamanhoFila(tipoFila, tamanho);
     }
+
 }
