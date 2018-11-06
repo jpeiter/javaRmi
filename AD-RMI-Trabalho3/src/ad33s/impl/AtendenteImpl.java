@@ -28,11 +28,6 @@ public class AtendenteImpl extends UnicastRemoteObject implements IAtendente {
     }
 
     @Override
-    public void atualizarSenhas(String senha) throws RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public void atualizarTamanhoFila(String tipo, int tamanho) throws RemoteException {
         callback.atualizaTamanhoFila(tipo, tamanho);
     }

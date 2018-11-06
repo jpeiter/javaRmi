@@ -5,6 +5,18 @@
  */
 package ad33s.views;
 
+import ad33s.impl.CallbackPainelImpl;
+import ad33s.interfaces.ICallbackPainel;
+import ad33s.interfaces.IControlador;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+import javax.swing.DefaultListModel;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author joao_
@@ -14,8 +26,29 @@ public class FrmPainel extends javax.swing.JFrame {
     /**
      * Creates new form FrmPainel
      */
+    private IControlador controlador;
+    private ICallbackPainel callback;
+    private DefaultListModel senhasChamadas;
+
     public FrmPainel() {
         initComponents();
+
+        String nome = JOptionPane.showInputDialog(null, "Nome do Painel", "Painel", JOptionPane.INFORMATION_MESSAGE);
+
+        senhasChamadas = new DefaultListModel();
+        try {
+            Registry registry = LocateRegistry.getRegistry(1053);
+            controlador = (IControlador) registry.lookup("Controlador");
+
+            callback = new CallbackPainelImpl(this);
+            controlador.registrarPainel(nome, callback);
+            System.out.println("Painel registrado e operando...");
+        } catch (RemoteException ex) {
+            System.out.println("RemoteException: " + ex.getMessage());
+        } catch (NotBoundException e) {
+            System.out.println("Objeto não encontrado: " + e.getMessage());
+        }
+
         this.setLocationRelativeTo(null);
     }
 
@@ -224,4 +257,21 @@ public class FrmPainel extends javax.swing.JFrame {
     private javax.swing.JLabel lblSenhaAtual;
     private javax.swing.JList<String> lstChamadas;
     // End of variables declaration//GEN-END:variables
+
+    public JLabel getLblAtendente() {
+        return lblAtendente;
+    }
+
+    public JLabel getLblSenhaAtual() {
+        return lblSenhaAtual;
+    }
+
+    public JList<String> getLstChamadas() {
+        return lstChamadas;
+    }
+
+    public DefaultListModel getSenhasChamadas() {
+        return senhasChamadas;
+    }
+
 }

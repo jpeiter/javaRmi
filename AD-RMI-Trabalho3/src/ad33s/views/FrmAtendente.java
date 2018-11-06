@@ -40,7 +40,12 @@ public class FrmAtendente extends javax.swing.JFrame {
             controlador = (IControlador) registro.lookup("Controlador");
 
             callback = new CallbackAtendenteImpl(this);
-            controlador.registrarAtendente(nome, callback);
+            int[] tamFilas = controlador.registrarAtendente(nome, callback);
+
+            counterConv.setText(String.valueOf(tamFilas[0]));
+            counterPref.setText(String.valueOf(tamFilas[1]));
+            counterVip.setText(String.valueOf(tamFilas[2]));
+
         } catch (RemoteException ex) {
             System.out.println("RemoteException: " + ex.getMessage());
         } catch (NotBoundException e) {
@@ -48,6 +53,7 @@ public class FrmAtendente extends javax.swing.JFrame {
         }
 
         lblAtendente.setText(!nome.isEmpty() ? nome : "Atendente");
+
         System.out.println(nome + " registrado e atendendo...");
         this.setLocationRelativeTo(null);
     }
@@ -238,15 +244,15 @@ public class FrmAtendente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSenhaConvencionalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSenhaConvencionalActionPerformed
-        atendeSenha(0);
+        atendeSenha("Convencional");
     }//GEN-LAST:event_btnSenhaConvencionalActionPerformed
 
     private void btnSenhaPreferencialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSenhaPreferencialActionPerformed
-        atendeSenha(1);
+        atendeSenha("Preferencial");
     }//GEN-LAST:event_btnSenhaPreferencialActionPerformed
 
     private void btnSenhaVIPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSenhaVIPActionPerformed
-        atendeSenha(2);
+        atendeSenha("VIP");
     }//GEN-LAST:event_btnSenhaVIPActionPerformed
 
     /**
@@ -303,18 +309,35 @@ public class FrmAtendente extends javax.swing.JFrame {
     private javax.swing.JLabel lblAtendente;
     // End of variables declaration//GEN-END:variables
 
-    private void atendeSenha(int numeroServico) {
+    private void atendeSenha(String servico) {
+
         try {
-            queueSize = controlador.atenderSenha(new Guiche().getSERVICOS()[numeroServico]);
-            callback.atualizarSenha(new Guiche().getSERVICOS()[numeroServico]);
-            if (queueSize == 0 || queueSize == -1) {
-                JOptionPane.showMessageDialog(null, "Não há senhas a serem atendidas!");
+            queueSize = controlador.atenderSenha(servico);
+
+            if (queueSize > 0) {
+                switch (servico) {
+                    case "Convencional":
+                        counterConv.setText(String.valueOf(queueSize));
+                        break;
+
+                    case "Preferencial":
+                        counterPref.setText(String.valueOf(queueSize));
+                        break;
+
+                    case "VIP":
+                        counterVip.setText(String.valueOf(queueSize));
+                        break;
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Não há senhas de " + servico + " a serem atendidas!");
             }
+
         } catch (RemoteException ex) {
-            Logger.getLogger(FrmAtendente.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Não há senhas de " + servico + " a serem atendidas!");
         }
+
     }
-    
+
     public void atualizaTamanhoFila(String tipoFila, int tamanhoFila) {
         switch (tipoFila) {
             case "CONV":
@@ -326,8 +349,8 @@ public class FrmAtendente extends javax.swing.JFrame {
             case "VIP":
                 counterVip.setText(String.valueOf(tamanhoFila));
                 break;
-                
-        }        
+
+        }
     }
 
 }
