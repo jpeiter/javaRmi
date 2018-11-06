@@ -198,7 +198,7 @@ public class ControladorImpl extends UnicastRemoteObject implements IControlador
     @Override
     public List<String> registrarPainel(String nome, ICallbackPainel callback) throws RemoteException {
         try {
-            painel = new PainelImpl(listaSenhas, registry);
+            painel = new PainelImpl(listaSenhas, registry, callback);
             registry.bind("Painel " + nome, painel);
             System.out.println("Painel " + nome + " registrado.");
             return listaSenhasChamadas;

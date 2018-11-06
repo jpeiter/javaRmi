@@ -246,7 +246,7 @@
       <SubComponents>
         <Component class="javax.swing.JButton" name="btnSenhaConvencional">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Convencional"/>
+            <Property name="text" type="java.lang.String" value="Chamar Convencional"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSenhaConvencionalActionPerformed"/>
@@ -254,7 +254,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnSenhaPreferencial">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Preferencial"/>
+            <Property name="text" type="java.lang.String" value="Chamar Preferencial"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSenhaPreferencialActionPerformed"/>
@@ -262,7 +262,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnSenhaVIP">
           <Properties>
-            <Property name="text" type="java.lang.String" value="V.I.P"/>
+            <Property name="text" type="java.lang.String" value="Chamar V.I.P"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSenhaVIPActionPerformed"/>

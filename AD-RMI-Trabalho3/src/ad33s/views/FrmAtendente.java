@@ -171,21 +171,21 @@ public class FrmAtendente extends javax.swing.JFrame {
                 .addContainerGap(55, Short.MAX_VALUE))
         );
 
-        btnSenhaConvencional.setText("Convencional");
+        btnSenhaConvencional.setText("Chamar Convencional");
         btnSenhaConvencional.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSenhaConvencionalActionPerformed(evt);
             }
         });
 
-        btnSenhaPreferencial.setText("Preferencial");
+        btnSenhaPreferencial.setText("Chamar Preferencial");
         btnSenhaPreferencial.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSenhaPreferencialActionPerformed(evt);
             }
         });
 
-        btnSenhaVIP.setText("V.I.P");
+        btnSenhaVIP.setText("Chamar V.I.P");
         btnSenhaVIP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSenhaVIPActionPerformed(evt);
