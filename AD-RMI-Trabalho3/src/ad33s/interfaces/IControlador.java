@@ -18,7 +18,7 @@ public interface IControlador extends Remote {
 
     public int[] registrarAtendente(String nome, ICallbackAtendente callback) throws RemoteException;
 
-    public List<String> registrarPainel(String nome, ICallbackPainel callback) throws RemoteException;
+    public List<String> registrarPainel(ICallbackPainel callback) throws RemoteException;
 
     public String solicitarSenha(String servico) throws RemoteException, NotBoundException;
 

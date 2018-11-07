@@ -36,6 +36,8 @@ public class ControladorImpl extends UnicastRemoteObject implements IControlador
 
     private List<String> listaSenhasChamadas;
 
+    private List<ICallbackPainel> paineis;
+
     private IAtendente atendente;
     private IPainel painel;
 
@@ -66,6 +68,7 @@ public class ControladorImpl extends UnicastRemoteObject implements IControlador
         listaSenhasVIP = new ArrayList<>();
 
         listaSenhasChamadas = new ArrayList<>();
+        paineis = new ArrayList<>();
 
         listaSenhas.add(listaSenhasConvencional);
         listaSenhas.add(listaSenhasPreferencial);
@@ -113,6 +116,10 @@ public class ControladorImpl extends UnicastRemoteObject implements IControlador
                         listaSenhasConvencional.get(0)
                 );
 
+                for (ICallbackPainel painel : paineis) {
+                    painel.atualizarPainel(listaSenhasConvencional.get(0));
+                }
+
                 listaSenhasConvencional.remove(0);
 
                 for (String nome : listAtendentes) {
@@ -134,6 +141,10 @@ public class ControladorImpl extends UnicastRemoteObject implements IControlador
                         listaSenhasPreferencial.get(0)
                 );
 
+                for (ICallbackPainel painel : paineis) {
+                    painel.atualizarPainel(listaSenhasPreferencial.get(0));
+                }
+
                 listaSenhasPreferencial.remove(0);
 
                 for (String nome : listAtendentes) {
@@ -154,7 +165,11 @@ public class ControladorImpl extends UnicastRemoteObject implements IControlador
                 listaSenhasChamadas.add(
                         listaSenhasVIP.get(0)
                 );
-
+                
+                for (ICallbackPainel painel : paineis) {
+                    painel.atualizarPainel(listaSenhasVIP.get(0));
+                }
+                
                 listaSenhasVIP.remove(0);
 
                 for (String nome : listAtendentes) {
@@ -197,17 +212,10 @@ public class ControladorImpl extends UnicastRemoteObject implements IControlador
     }
 
     @Override
-    public List<String> registrarPainel(String nome, ICallbackPainel callback) throws RemoteException {
-        try {
-            painel = new PainelImpl(listaSenhas, registry, callback);
-            registry.bind(nome, painel);
-            System.out.println("Painel " + nome + " registrado.");
-            return listaSenhasChamadas;
-        } catch (RemoteException ex) {
-            System.out.println("RemoteException: " + ex.getMessage());
-        } catch (AlreadyBoundException ex) {
-            System.out.println("Já existe um painel com esse nome registrado!!! " + ex.getMessage());
-        }
-        return null;
+    public List<String> registrarPainel(ICallbackPainel callback) throws RemoteException {
+
+        paineis.add(callback);
+        System.out.println("Painel registrado.");
+        return listaSenhasChamadas;
     }
 }
