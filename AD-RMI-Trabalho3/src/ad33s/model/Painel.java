@@ -1,5 +1,6 @@
 package ad33s.model;
 
+import ad33s.interfaces.ICallbackPainel;
 import java.util.List;
 
 /**
@@ -11,6 +12,7 @@ public class Painel {
     private List<String> senhas;
     private String senhaAtual;
     private String atendente;
+    private ICallbackPainel callback;
 
     public Painel() {
     }
@@ -37,6 +39,14 @@ public class Painel {
 
     public void setAtendente(String atendente) {
         this.atendente = atendente;
+    }
+
+    public ICallbackPainel getCallback() {
+        return callback;
+    }
+
+    public void setCallback(ICallbackPainel callback) {
+        this.callback = callback;
     }
 
 }

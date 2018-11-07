@@ -19,8 +19,8 @@ public class CallbackPainelImpl extends UnicastRemoteObject implements ICallback
     }
 
     @Override
-    public void atualizarPainel(String servico) throws RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void atualizarPainel(String senha) throws RemoteException {
+        frmPainel.atualizarPainel(senha);
     }
 
 }

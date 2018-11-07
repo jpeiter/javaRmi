@@ -8,13 +8,10 @@ package ad33s.views;
 import ad33s.impl.CallbackAtendenteImpl;
 import ad33s.interfaces.ICallbackAtendente;
 import ad33s.interfaces.IControlador;
-import ad33s.model.Guiche;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**

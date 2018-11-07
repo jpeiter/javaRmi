@@ -29,9 +29,8 @@ public class PainelImpl extends UnicastRemoteObject implements IPainel {
     }
 
     @Override
-    public void atualizarPainel() throws RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void atualizarPainel(String senha) throws RemoteException {
+        callback.atualizarPainel(senha);
     }
-
 
 }

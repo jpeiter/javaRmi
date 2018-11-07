@@ -5,6 +5,7 @@ import ad33s.interfaces.ICallbackAtendente;
 import ad33s.interfaces.ICallbackPainel;
 import ad33s.interfaces.IControlador;
 import ad33s.interfaces.IPainel;
+import ad33s.model.Painel;
 import java.rmi.AccessException;
 import java.rmi.AlreadyBoundException;
 import java.rmi.NotBoundException;
@@ -25,7 +26,7 @@ public class ControladorImpl extends UnicastRemoteObject implements IControlador
     private Registry registry = null;
 
     private List<String> listAtendentes;
-    private List<String> listPaineis;
+    private List<Painel> listPaineis;
 
     private List<List> listaSenhas;
 
@@ -199,7 +200,7 @@ public class ControladorImpl extends UnicastRemoteObject implements IControlador
     public List<String> registrarPainel(String nome, ICallbackPainel callback) throws RemoteException {
         try {
             painel = new PainelImpl(listaSenhas, registry, callback);
-            registry.bind("Painel " + nome, painel);
+            registry.bind(nome, painel);
             System.out.println("Painel " + nome + " registrado.");
             return listaSenhasChamadas;
         } catch (RemoteException ex) {

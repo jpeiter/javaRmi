@@ -12,9 +12,8 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.util.List;
 import javax.swing.DefaultListModel;
-import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JOptionPane;
 
 /**
@@ -39,10 +38,17 @@ public class FrmPainel extends javax.swing.JFrame {
         try {
             Registry registry = LocateRegistry.getRegistry(1053);
             controlador = (IControlador) registry.lookup("Controlador");
-
             callback = new CallbackPainelImpl(this);
-            controlador.registrarPainel(nome, callback);
-            System.out.println("Painel registrado e operando...");
+
+            List<String> senhas = controlador.registrarPainel(nome, callback);
+
+            if (senhas.size() > 0) {
+                for (String senha : senhas) {
+                    senhasChamadas.addElement(senha);
+                }
+            }
+
+            System.out.println("Painel " + nome + " registrado e operando...");
         } catch (RemoteException ex) {
             System.out.println("RemoteException: " + ex.getMessage());
         } catch (NotBoundException e) {
@@ -258,20 +264,10 @@ public class FrmPainel extends javax.swing.JFrame {
     private javax.swing.JList<String> lstChamadas;
     // End of variables declaration//GEN-END:variables
 
-    public JLabel getLblAtendente() {
-        return lblAtendente;
-    }
-
-    public JLabel getLblSenhaAtual() {
-        return lblSenhaAtual;
-    }
-
-    public JList<String> getLstChamadas() {
-        return lstChamadas;
-    }
-
-    public DefaultListModel getSenhasChamadas() {
-        return senhasChamadas;
+    public void atualizarPainel(String senha) {
+        senhasChamadas.addElement(senha);
+        lstChamadas.setModel(senhasChamadas);
+        lblSenhaAtual.setText(senha);
     }
 
 }
