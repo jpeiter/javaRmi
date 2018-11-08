@@ -11,8 +11,6 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -21,12 +19,10 @@ import javax.swing.JOptionPane;
  */
 public class FrmGuiche extends javax.swing.JFrame {
 
-    private Guiche guiche;
     private IControlador controlador = null;
 
     public FrmGuiche() {
         initComponents();
-        guiche = new Guiche();
 
         try {
             Registry registro = LocateRegistry.getRegistry(1053);
@@ -204,7 +200,8 @@ public class FrmGuiche extends javax.swing.JFrame {
             String senha = controlador.solicitarSenha(new Guiche().getSERVICOS()[numeroServico]);
             JOptionPane.showMessageDialog(null, "Sua senha é: " + senha);
         } catch (RemoteException | NotBoundException ex) {
-            Logger.getLogger(FrmGuiche.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Erro " + ex.getMessage());
+            ex.printStackTrace();
         }
     }
 

@@ -9,6 +9,6 @@ import java.rmi.RemoteException;
  */
 public interface IPainel extends Remote {
 
-    public void atualizarPainel(String senha) throws RemoteException;
+    public void atualizarPainel(String senha, String nomeAtendente) throws RemoteException;
 
 }

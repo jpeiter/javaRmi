@@ -19,8 +19,8 @@ public class CallbackPainelImpl extends UnicastRemoteObject implements ICallback
     }
 
     @Override
-    public void atualizarPainel(String senha) throws RemoteException {
-        frmPainel.atualizarPainel(senha);
+    public void atualizarPainel(String senha, String nomeAtendente) throws RemoteException {
+        frmPainel.atualizarPainel(senha, nomeAtendente);
     }
 
 }

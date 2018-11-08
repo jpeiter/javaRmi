@@ -27,19 +27,14 @@ public class ControladorImpl extends UnicastRemoteObject implements IControlador
 
     private List<String> listAtendentes;
     private List<Painel> listPaineis;
-
     private List<List> listaSenhas;
-
     private List<String> listaSenhasConvencional;
     private List<String> listaSenhasPreferencial;
     private List<String> listaSenhasVIP;
-
     private List<String> listaSenhasChamadas;
-
     private List<ICallbackPainel> paineis;
 
     private IAtendente atendente;
-    private IPainel painel;
 
     private int contadorConvencional = 1, contadorPreferencial = 1, contadorVIP = 1;
 
@@ -107,7 +102,7 @@ public class ControladorImpl extends UnicastRemoteObject implements IControlador
     }
 
     @Override
-    public int atenderSenha(String servico) throws RemoteException, AccessException {
+    public int atenderSenha(String servico, String nomeAtendente) throws RemoteException, AccessException {
         if ((!listaSenhasConvencional.isEmpty()) || (!listaSenhasPreferencial.isEmpty()) || (!listaSenhasVIP.isEmpty())) {
             if (servico.equals("Convencional")) {
                 System.out.println("Senha " + servico + listaSenhasConvencional.get(0) + " atendida.");
@@ -117,7 +112,7 @@ public class ControladorImpl extends UnicastRemoteObject implements IControlador
                 );
 
                 for (ICallbackPainel painel : paineis) {
-                    painel.atualizarPainel(listaSenhasConvencional.get(0));
+                    painel.atualizarPainel(listaSenhasConvencional.get(0), nomeAtendente);
                 }
 
                 listaSenhasConvencional.remove(0);
@@ -132,7 +127,12 @@ public class ControladorImpl extends UnicastRemoteObject implements IControlador
                     }
                 }
 
-                return listaSenhasConvencional.size();
+                if (listaSenhasConvencional.size() > 0) {
+                    return listaSenhasConvencional.size();
+
+                } else {
+                    return -1;
+                }
 
             } else if (servico.equals("Preferencial")) {
                 System.out.println("Senha " + servico + listaSenhasPreferencial.get(0) + " atendida.");
@@ -142,7 +142,7 @@ public class ControladorImpl extends UnicastRemoteObject implements IControlador
                 );
 
                 for (ICallbackPainel painel : paineis) {
-                    painel.atualizarPainel(listaSenhasPreferencial.get(0));
+                    painel.atualizarPainel(listaSenhasPreferencial.get(0), nomeAtendente);
                 }
 
                 listaSenhasPreferencial.remove(0);
@@ -165,11 +165,11 @@ public class ControladorImpl extends UnicastRemoteObject implements IControlador
                 listaSenhasChamadas.add(
                         listaSenhasVIP.get(0)
                 );
-                
+
                 for (ICallbackPainel painel : paineis) {
-                    painel.atualizarPainel(listaSenhasVIP.get(0));
+                    painel.atualizarPainel(listaSenhasVIP.get(0), nomeAtendente);
                 }
-                
+
                 listaSenhasVIP.remove(0);
 
                 for (String nome : listAtendentes) {
@@ -213,7 +213,6 @@ public class ControladorImpl extends UnicastRemoteObject implements IControlador
 
     @Override
     public List<String> registrarPainel(ICallbackPainel callback) throws RemoteException {
-
         paineis.add(callback);
         System.out.println("Painel registrado.");
         return listaSenhasChamadas;

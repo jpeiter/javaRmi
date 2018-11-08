@@ -22,6 +22,6 @@ public interface IControlador extends Remote {
 
     public String solicitarSenha(String servico) throws RemoteException, NotBoundException;
 
-    public int atenderSenha(String servico) throws RemoteException;
+    public int atenderSenha(String servico, String nomeAtendente) throws RemoteException;
 
 }

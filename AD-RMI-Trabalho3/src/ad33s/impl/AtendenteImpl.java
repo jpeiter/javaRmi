@@ -9,22 +9,21 @@ import java.rmi.server.UnicastRemoteObject;
 
 public class AtendenteImpl extends UnicastRemoteObject implements IAtendente {
 
+    Registry registry;
+    ICallbackAtendente callback;
     List<List> listaSenhas;
     List<String> listaSenhasConvencional;
     List<String> listaSenhasPreferencial;
     List<String> listaSenhasVIP;
-    int tamanhoFila;
-    Registry registry;
-    ICallbackAtendente callback;
 
     public AtendenteImpl(List<List> listaSenhas, Registry registry, ICallbackAtendente callback) throws RemoteException {
         super();
+        this.registry = registry;
+        this.callback = callback;
         this.listaSenhas = listaSenhas;
         this.listaSenhasConvencional = listaSenhas.get(0);
         this.listaSenhasPreferencial = listaSenhas.get(1);
         this.listaSenhasVIP = listaSenhas.get(2);
-        this.registry = registry;
-        this.callback = callback;
     }
 
     @Override

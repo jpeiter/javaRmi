@@ -17,7 +17,6 @@ public class Servidor {
     public Servidor(int porta) {
         try {
             registro = LocateRegistry.createRegistry(porta);
-
         } catch (Exception e) {
             System.out.println("Erro:" + e);
         }

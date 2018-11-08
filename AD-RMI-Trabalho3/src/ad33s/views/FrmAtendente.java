@@ -25,19 +25,20 @@ public class FrmAtendente extends javax.swing.JFrame {
      */
     private IControlador controlador;
     private ICallbackAtendente callback;
-    private int queueSize;
+    private int tamanhoFila;
+    private String nomeAtendente;
 
     public FrmAtendente() {
         initComponents();
         //Pedir o nome do atendente e setar no "lblAtendente"
-        String nome = JOptionPane.showInputDialog(null, "Nome do atendente", "Atendente", JOptionPane.INFORMATION_MESSAGE);
+        nomeAtendente = JOptionPane.showInputDialog(null, "Nome do atendente", "Atendente", JOptionPane.INFORMATION_MESSAGE);
 
         try {
             Registry registro = LocateRegistry.getRegistry(1053);
             controlador = (IControlador) registro.lookup("Controlador");
 
             callback = new CallbackAtendenteImpl(this);
-            int[] tamFilas = controlador.registrarAtendente(nome, callback);
+            int[] tamFilas = controlador.registrarAtendente(nomeAtendente, callback);
 
             counterConv.setText(String.valueOf(tamFilas[0]));
             counterPref.setText(String.valueOf(tamFilas[1]));
@@ -49,9 +50,9 @@ public class FrmAtendente extends javax.swing.JFrame {
             System.out.println("Objeto não encontrado: " + e.getMessage());
         }
 
-        lblAtendente.setText(!nome.isEmpty() ? nome : "Atendente");
+        lblAtendente.setText(!nomeAtendente.isEmpty() ? nomeAtendente : "Atendente");
 
-        System.out.println(nome + " registrado e atendendo...");
+        System.out.println(nomeAtendente + " registrado e atendendo...");
         this.setLocationRelativeTo(null);
     }
 
@@ -307,30 +308,29 @@ public class FrmAtendente extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void atendeSenha(String servico) {
-
         try {
 
-            queueSize = controlador.atenderSenha(servico);
-            if (queueSize > 0) {
+            tamanhoFila = controlador.atenderSenha(servico, nomeAtendente);
+            if (tamanhoFila > 0) {
                 switch (servico) {
                     case "Convencional":
-                        counterConv.setText(String.valueOf(queueSize));
+                        counterConv.setText(String.valueOf(tamanhoFila));
                         break;
 
                     case "Preferencial":
-                        counterPref.setText(String.valueOf(queueSize));
+                        counterPref.setText(String.valueOf(tamanhoFila));
                         break;
 
                     case "VIP":
-                        counterVip.setText(String.valueOf(queueSize));
+                        counterVip.setText(String.valueOf(tamanhoFila));
                         break;
                 }
             } else {
                 JOptionPane.showMessageDialog(null, "Não há senhas de " + servico + " a serem atendidas!");
             }
-
         } catch (RemoteException ex) {
-            JOptionPane.showMessageDialog(null, "Não há senhas de " + servico + " a serem atendidas!");
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+            ex.printStackTrace();
         }
 
     }
@@ -346,7 +346,6 @@ public class FrmAtendente extends javax.swing.JFrame {
             case "VIP":
                 counterVip.setText(String.valueOf(tamanhoFila));
                 break;
-
         }
     }
 

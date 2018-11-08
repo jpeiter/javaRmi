@@ -29,8 +29,8 @@ public class PainelImpl extends UnicastRemoteObject implements IPainel {
     }
 
     @Override
-    public void atualizarPainel(String senha) throws RemoteException {
-        callback.atualizarPainel(senha);
+    public void atualizarPainel(String senha, String nomeAtendente) throws RemoteException {
+        callback.atualizarPainel(senha, nomeAtendente);
     }
 
 }

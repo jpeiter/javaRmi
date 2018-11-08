@@ -14,7 +14,6 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.util.List;
 import javax.swing.DefaultListModel;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -32,8 +31,6 @@ public class FrmPainel extends javax.swing.JFrame {
     public FrmPainel() {
         initComponents();
 
-        String nome = JOptionPane.showInputDialog(null, "Nome do Painel", "Painel", JOptionPane.INFORMATION_MESSAGE);
-
         senhasChamadas = new DefaultListModel();
         try {
             Registry registry = LocateRegistry.getRegistry(1053);
@@ -46,9 +43,11 @@ public class FrmPainel extends javax.swing.JFrame {
                 for (String senha : senhas) {
                     senhasChamadas.addElement(senha);
                 }
+                lblSenhaAtual.setText(senhasChamadas.get(senhasChamadas.size() - 1).toString());
+                lstChamadas.setModel(senhasChamadas);
             }
 
-            System.out.println("Painel " + nome + " registrado e operando...");
+            System.out.println("Painel registrado e operando...");
         } catch (RemoteException ex) {
             System.out.println("RemoteException: " + ex.getMessage());
         } catch (NotBoundException e) {
@@ -264,10 +263,10 @@ public class FrmPainel extends javax.swing.JFrame {
     private javax.swing.JList<String> lstChamadas;
     // End of variables declaration//GEN-END:variables
 
-    public void atualizarPainel(String senha) {
+    public void atualizarPainel(String senha, String nomeAtendente) {
+        lblSenhaAtual.setText(senha);
         senhasChamadas.addElement(senha);
         lstChamadas.setModel(senhasChamadas);
-        lblSenhaAtual.setText(senha);
     }
 
 }
