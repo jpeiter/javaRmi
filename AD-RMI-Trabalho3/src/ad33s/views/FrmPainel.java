@@ -40,7 +40,7 @@ public class FrmPainel extends javax.swing.JFrame {
             controlador = (IControlador) registry.lookup("Controlador");
             callback = new CallbackPainelImpl(this);
 
-            List<String> senhas = controlador.registrarPainel(nome, callback);
+            List<String> senhas = controlador.registrarPainel(callback);
 
             if (senhas.size() > 0) {
                 for (String senha : senhas) {

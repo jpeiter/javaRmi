@@ -309,8 +309,8 @@ public class FrmAtendente extends javax.swing.JFrame {
     private void atendeSenha(String servico) {
 
         try {
-            queueSize = controlador.atenderSenha(servico);
 
+            queueSize = controlador.atenderSenha(servico);
             if (queueSize > 0) {
                 switch (servico) {
                     case "Convencional":
