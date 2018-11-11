@@ -102,91 +102,82 @@ public class ControladorImpl extends UnicastRemoteObject implements IControlador
 
     @Override
     public int atenderSenha(String servico, String nomeAtendente) throws RemoteException, AccessException {
-        if ((!listaSenhasConvencional.isEmpty()) || (!listaSenhasPreferencial.isEmpty()) || (!listaSenhasVIP.isEmpty())) {
-            if (servico.equals("Convencional")) {
-                System.out.println("Senha " + servico + listaSenhasConvencional.get(0) + " atendida.");
+//        if ((!listaSenhasConvencional.isEmpty()) || (!listaSenhasPreferencial.isEmpty()) || (!listaSenhasVIP.isEmpty())) {
+        if (servico.equals("Convencional") && (!listaSenhasConvencional.isEmpty())) {
+            System.out.println("Senha " + servico + listaSenhasConvencional.get(0) + " atendida.");
 
-                listaSenhasChamadas.add(
-                        listaSenhasConvencional.get(0)
-                );
+            listaSenhasChamadas.add(
+                    listaSenhasConvencional.get(0)
+            );
 
-                for (ICallbackPainel painel : paineis) {
-                    painel.atualizarPainel(listaSenhasConvencional.get(0), nomeAtendente);
-                }
-
-                listaSenhasConvencional.remove(0);
-
-                for (String nome : listAtendentes) {
-                    IAtendente atendente;
-                    try {
-                        atendente = (IAtendente) registry.lookup("Atendente " + nome);
-                        atendente.atualizarTamanhoFila("CONV", listaSenhasConvencional.size());
-                    } catch (NotBoundException ex) {
-                        Logger.getLogger(ControladorImpl.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }
-
-                if (listaSenhasConvencional.size() > 0) {
-                    return listaSenhasConvencional.size();
-
-                } else {
-                    return -1;
-                }
-
-            } else if (servico.equals("Preferencial")) {
-                System.out.println("Senha " + servico + listaSenhasPreferencial.get(0) + " atendida.");
-
-                listaSenhasChamadas.add(
-                        listaSenhasPreferencial.get(0)
-                );
-
-                for (ICallbackPainel painel : paineis) {
-                    painel.atualizarPainel(listaSenhasPreferencial.get(0), nomeAtendente);
-                }
-
-                listaSenhasPreferencial.remove(0);
-
-                for (String nome : listAtendentes) {
-                    IAtendente atendente;
-                    try {
-                        atendente = (IAtendente) registry.lookup("Atendente " + nome);
-                        atendente.atualizarTamanhoFila("PREF", listaSenhasPreferencial.size());
-                    } catch (NotBoundException ex) {
-                        Logger.getLogger(ControladorImpl.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }
-
-                return listaSenhasPreferencial.size();
-
-            } else {
-                System.out.println("Senha " + servico + listaSenhasVIP.get(0) + " atendida.");
-
-                listaSenhasChamadas.add(
-                        listaSenhasVIP.get(0)
-                );
-
-                for (ICallbackPainel painel : paineis) {
-                    painel.atualizarPainel(listaSenhasVIP.get(0), nomeAtendente);
-                }
-
-                listaSenhasVIP.remove(0);
-
-                for (String nome : listAtendentes) {
-                    IAtendente atendente;
-                    try {
-                        atendente = (IAtendente) registry.lookup("Atendente " + nome);
-                        atendente.atualizarTamanhoFila("VIP", listaSenhasVIP.size());
-                    } catch (NotBoundException ex) {
-                        Logger.getLogger(ControladorImpl.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }
-
-                return listaSenhasVIP.size();
-
+            for (ICallbackPainel painel : paineis) {
+                painel.atualizarPainel(listaSenhasConvencional.get(0), nomeAtendente);
             }
-        } else {
-            return -1;
+
+            listaSenhasConvencional.remove(0);
+
+            for (String nome : listAtendentes) {
+                IAtendente atendente;
+                try {
+                    atendente = (IAtendente) registry.lookup("Atendente " + nome);
+                    atendente.atualizarTamanhoFila("Convencional", listaSenhasConvencional.size());
+                } catch (NotBoundException ex) {
+                    Logger.getLogger(ControladorImpl.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+
+            return listaSenhasConvencional.size();
+
+        } else if (servico.equals("Preferencial") && (!listaSenhasPreferencial.isEmpty())) {
+            System.out.println("Senha " + servico + listaSenhasPreferencial.get(0) + " atendida.");
+
+            listaSenhasChamadas.add(
+                    listaSenhasPreferencial.get(0)
+            );
+
+            for (ICallbackPainel painel : paineis) {
+                painel.atualizarPainel(listaSenhasPreferencial.get(0), nomeAtendente);
+            }
+
+            listaSenhasPreferencial.remove(0);
+
+            for (String nome : listAtendentes) {
+                IAtendente atendente;
+                try {
+                    atendente = (IAtendente) registry.lookup("Atendente " + nome);
+                    atendente.atualizarTamanhoFila("Preferencial", listaSenhasPreferencial.size());
+                } catch (NotBoundException ex) {
+                    Logger.getLogger(ControladorImpl.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            return listaSenhasPreferencial.size();
+
+        } else if (servico.equals("VIP") && (!listaSenhasVIP.isEmpty())) {
+            System.out.println("Senha " + servico + listaSenhasVIP.get(0) + " atendida.");
+
+            listaSenhasChamadas.add(
+                    listaSenhasVIP.get(0)
+            );
+
+            for (ICallbackPainel painel : paineis) {
+                painel.atualizarPainel(listaSenhasVIP.get(0), nomeAtendente);
+            }
+
+            listaSenhasVIP.remove(0);
+
+            for (String nome : listAtendentes) {
+                IAtendente atendente;
+                try {
+                    atendente = (IAtendente) registry.lookup("Atendente " + nome);
+                    atendente.atualizarTamanhoFila("VIP", listaSenhasVIP.size());
+                } catch (NotBoundException ex) {
+                    Logger.getLogger(ControladorImpl.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            return listaSenhasVIP.size();
         }
+        return -1;
+
     }
 
     @Override

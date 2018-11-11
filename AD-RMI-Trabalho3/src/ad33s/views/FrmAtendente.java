@@ -321,37 +321,10 @@ public class FrmAtendente extends javax.swing.JFrame {
 
             tamanhoFila = controlador.atenderSenha(servico, nomeAtendente);
 
-            if (tamanhoFila > 0) {
-                switch (servico) {
-                    case "Convencional":
-                        btnSenhaConvencional.setEnabled(true);
-                        counterConv.setText(String.valueOf(tamanhoFila));
-                        break;
-
-                    case "Preferencial":
-                        btnSenhaPreferencial.setEnabled(true);
-                        counterPref.setText(String.valueOf(tamanhoFila));
-                        break;
-
-                    case "VIP":
-                        btnSenhaVIP.setEnabled(true);
-                        counterVip.setText(String.valueOf(tamanhoFila));
-                        break;
-                }
+            if (tamanhoFila >= 0) {
+                atualizaTamanhoFila(servico, tamanhoFila);
             } else {
-                switch (servico) {
-                    case "Convencional":
-                        btnSenhaConvencional.setEnabled(false);
-                        break;
-
-                    case "Preferencial":
-                        btnSenhaPreferencial.setEnabled(false);
-                        break;
-
-                    case "VIP":
-                        btnSenhaVIP.setEnabled(false);
-                        break;
-                }
+                JOptionPane.showMessageDialog(null, "Não há mais senhas há serem chamadas!");
             }
         } catch (RemoteException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());
@@ -362,10 +335,10 @@ public class FrmAtendente extends javax.swing.JFrame {
 
     public void atualizaTamanhoFila(String tipoFila, int tamanhoFila) {
         switch (tipoFila) {
-            case "CONV":
+            case "Convencional":
                 counterConv.setText(String.valueOf(tamanhoFila));
                 break;
-            case "PREF":
+            case "Preferencial":
                 counterPref.setText(String.valueOf(tamanhoFila));
                 break;
             case "VIP":
