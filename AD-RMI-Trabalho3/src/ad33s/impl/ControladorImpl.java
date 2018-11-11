@@ -31,6 +31,9 @@ public class ControladorImpl extends UnicastRemoteObject implements IControlador
     private List<String> listaSenhasPreferencial;
     private List<String> listaSenhasVIP;
     private List<String> listaSenhasChamadas;
+    private List<String> listaSenhasChamadasConv;
+    private List<String> listaSenhasChamadasPref;
+    private List<String> listaSenhasChamadasVip;
     private List<ICallbackPainel> paineis;
 
     private IAtendente atendente;
@@ -62,6 +65,9 @@ public class ControladorImpl extends UnicastRemoteObject implements IControlador
         listaSenhasVIP = new ArrayList<>();
 
         listaSenhasChamadas = new ArrayList<>();
+        listaSenhasChamadasConv = new ArrayList<>();
+        listaSenhasChamadasPref = new ArrayList<>();
+        listaSenhasChamadasVip = new ArrayList<>();
         paineis = new ArrayList<>();
 
         listaSenhas.add(listaSenhasConvencional);
@@ -109,6 +115,9 @@ public class ControladorImpl extends UnicastRemoteObject implements IControlador
             listaSenhasChamadas.add(
                     listaSenhasConvencional.get(0)
             );
+            listaSenhasChamadasConv.add(
+                    nomeAtendente + ";" + listaSenhasConvencional.get(0)
+            );
 
             for (ICallbackPainel painel : paineis) {
                 painel.atualizarPainel(listaSenhasConvencional.get(0), nomeAtendente);
@@ -134,6 +143,9 @@ public class ControladorImpl extends UnicastRemoteObject implements IControlador
             listaSenhasChamadas.add(
                     listaSenhasPreferencial.get(0)
             );
+            listaSenhasChamadasPref.add(
+                    nomeAtendente + ";" + listaSenhasPreferencial.get(0)
+            );
 
             for (ICallbackPainel painel : paineis) {
                 painel.atualizarPainel(listaSenhasPreferencial.get(0), nomeAtendente);
@@ -157,6 +169,9 @@ public class ControladorImpl extends UnicastRemoteObject implements IControlador
 
             listaSenhasChamadas.add(
                     listaSenhasVIP.get(0)
+            );
+            listaSenhasChamadasVip.add(
+                    nomeAtendente + ";" + listaSenhasVIP.get(0)
             );
 
             for (ICallbackPainel painel : paineis) {
