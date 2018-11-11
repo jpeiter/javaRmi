@@ -8,12 +8,14 @@ package ad33s.views;
 import ad33s.impl.CallbackPainelImpl;
 import ad33s.interfaces.ICallbackPainel;
 import ad33s.interfaces.IControlador;
+import java.awt.event.WindowListener;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.util.List;
 import javax.swing.DefaultListModel;
+import javax.swing.JFrame;
 
 /**
  *
@@ -54,6 +56,7 @@ public class FrmPainel extends javax.swing.JFrame {
             System.out.println("Objeto não encontrado: " + e.getMessage());
         }
 
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setLocationRelativeTo(null);
     }
 
@@ -269,5 +272,4 @@ public class FrmPainel extends javax.swing.JFrame {
         senhasChamadas.addElement(senha);
         lstChamadas.setModel(senhasChamadas);
     }
-
 }

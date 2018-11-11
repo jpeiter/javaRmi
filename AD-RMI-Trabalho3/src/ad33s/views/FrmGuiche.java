@@ -11,6 +11,7 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
@@ -33,6 +34,7 @@ public class FrmGuiche extends javax.swing.JFrame {
             System.out.println("Objeto não encontrado: " + e.getMessage());
         }
 
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setLocationRelativeTo(null);
     }
 
