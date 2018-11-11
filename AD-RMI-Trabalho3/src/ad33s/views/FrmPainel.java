@@ -265,7 +265,8 @@ public class FrmPainel extends javax.swing.JFrame {
 
     public void atualizarPainel(String senha, String nomeAtendente) {
         lblSenhaAtual.setText(senha);
-        senhasChamadas.addElement(senha);
+        lblAtendente.setText(nomeAtendente);
+       senhasChamadas.addElement(senha);
         lstChamadas.setModel(senhasChamadas);
     }
 

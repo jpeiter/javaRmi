@@ -85,6 +85,11 @@ public class FrmAtendente extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Janela de Atendimento");
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel1.setText("Atendente:");
@@ -253,6 +258,10 @@ public class FrmAtendente extends javax.swing.JFrame {
         atendeSenha("VIP");
     }//GEN-LAST:event_btnSenhaVIPActionPerformed
 
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        this.dispose();
+    }//GEN-LAST:event_formWindowClosed
+
     /**
      * @param args the command line arguments
      */
@@ -311,22 +320,38 @@ public class FrmAtendente extends javax.swing.JFrame {
         try {
 
             tamanhoFila = controlador.atenderSenha(servico, nomeAtendente);
+
             if (tamanhoFila > 0) {
                 switch (servico) {
                     case "Convencional":
+                        btnSenhaConvencional.setEnabled(true);
                         counterConv.setText(String.valueOf(tamanhoFila));
                         break;
 
                     case "Preferencial":
+                        btnSenhaPreferencial.setEnabled(true);
                         counterPref.setText(String.valueOf(tamanhoFila));
                         break;
 
                     case "VIP":
+                        btnSenhaVIP.setEnabled(true);
                         counterVip.setText(String.valueOf(tamanhoFila));
                         break;
                 }
             } else {
-                JOptionPane.showMessageDialog(null, "Não há senhas de " + servico + " a serem atendidas!");
+                switch (servico) {
+                    case "Convencional":
+                        btnSenhaConvencional.setEnabled(false);
+                        break;
+
+                    case "Preferencial":
+                        btnSenhaPreferencial.setEnabled(false);
+                        break;
+
+                    case "VIP":
+                        btnSenhaVIP.setEnabled(false);
+                        break;
+                }
             }
         } catch (RemoteException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());

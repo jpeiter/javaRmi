@@ -4,7 +4,6 @@ import ad33s.interfaces.IAtendente;
 import ad33s.interfaces.ICallbackAtendente;
 import ad33s.interfaces.ICallbackPainel;
 import ad33s.interfaces.IControlador;
-import ad33s.interfaces.IPainel;
 import ad33s.model.Painel;
 import java.rmi.AccessException;
 import java.rmi.AlreadyBoundException;
