@@ -12,6 +12,7 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
@@ -45,7 +46,7 @@ public class FrmAtendente extends javax.swing.JFrame {
             counterVip.setText(String.valueOf(tamFilas[2]));
 
         } catch (RemoteException ex) {
-            System.out.println("RemoteException: " + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Já existe um atendente com esse nome!");
         } catch (NotBoundException e) {
             System.out.println("Objeto não encontrado: " + e.getMessage());
         }
@@ -53,6 +54,8 @@ public class FrmAtendente extends javax.swing.JFrame {
         lblAtendente.setText(!nomeAtendente.isEmpty() ? nomeAtendente : "Atendente");
 
         System.out.println(nomeAtendente + " registrado e atendendo...");
+
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setLocationRelativeTo(null);
     }
 

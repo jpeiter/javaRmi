@@ -1,6 +1,5 @@
 package ad33s.views;
 
-import ad33s.impl.ControladorImpl;
 import ad33s.interfaces.IControlador;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
@@ -9,6 +8,7 @@ import java.rmi.registry.Registry;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -22,26 +22,39 @@ public class DlgEstatisticas extends javax.swing.JDialog {
     private DefaultComboBoxModel cmbModel;
     private IControlador controlador;
     private List<List> listaEstatisticas;
-    private DefaultListModel listModel;
+//    private DefaultListModel listModel;
+    private List<String> atendentes;
+    private List<String> convChamadas;
+    private List<String> prefChamadas;
+    private List<String> vipChamadas;
 
     public DlgEstatisticas(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
 
         cmbModel = new DefaultComboBoxModel();
-        listModel = new DefaultListModel();
+//        listModel = new DefaultListModel();
 
         try {
             Registry registro = LocateRegistry.getRegistry(1053);
             controlador = (IControlador) registro.lookup("Controlador");
             listaEstatisticas = controlador.solicitarEstatisticas();
-            carregarListas();
-            
+
+            atendentes = listaEstatisticas.get(0);
+            convChamadas = listaEstatisticas.get(1);
+            prefChamadas = listaEstatisticas.get(2);
+            vipChamadas = listaEstatisticas.get(3);
+
+            carregarAtendentes();
+            cmbAtendente.setSelectedIndex(-1);
+
         } catch (RemoteException ex) {
             System.out.println(ex);
         } catch (NotBoundException e) {
             System.out.println("Objeto não encontrado: " + e.getMessage());
         }
+
+        this.setLocationRelativeTo(null);
 
     }
 
@@ -81,6 +94,11 @@ public class DlgEstatisticas extends javax.swing.JDialog {
 
         jLabel3.setText("VIP:");
 
+        cmbAtendente.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cmbAtendenteItemStateChanged(evt);
+            }
+        });
         cmbAtendente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbAtendenteActionPerformed(evt);
@@ -150,6 +168,28 @@ public class DlgEstatisticas extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbAtendenteActionPerformed
 
+    private void cmbAtendenteItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbAtendenteItemStateChanged
+        if (cmbAtendente.getSelectedIndex() > -1) {
+            lstConvencional.setModel(
+                    solicitaSenhaAtendente(
+                            convChamadas,
+                            cmbAtendente.getSelectedItem().toString()
+                    ));
+
+            lstPreferencial.setModel(
+                    solicitaSenhaAtendente(
+                            prefChamadas,
+                            cmbAtendente.getSelectedItem().toString()
+                    ));
+
+            lstVip.setModel(
+                    solicitaSenhaAtendente(
+                            vipChamadas,
+                            cmbAtendente.getSelectedItem().toString()
+                    ));
+        }
+    }//GEN-LAST:event_cmbAtendenteItemStateChanged
+
     /**
      * @param args the command line arguments
      */
@@ -207,22 +247,20 @@ public class DlgEstatisticas extends javax.swing.JDialog {
     private javax.swing.JList<String> lstVip;
     // End of variables declaration//GEN-END:variables
 
-    private void carregarListas(){
-        cmbModel.addElement(listaEstatisticas.get(0));
+    private void carregarAtendentes() {
+        for (String atendente : atendentes) {
+            cmbModel.addElement(atendente);
+        }
         cmbAtendente.setModel(cmbModel);
-        cmbModel.removeAllElements();
-        
-        listModel.addElement(listaEstatisticas.get(1));
-        lstConvencional.setModel(listModel);
-        listModel.clear();
-        
-        listModel.addElement(listaEstatisticas.get(2));
-        lstPreferencial.setModel(listModel);
-        listModel.clear();
-        
-        listModel.addElement(listaEstatisticas.get(3));
-        lstVip.setModel(listModel);
-        listModel.clear();
     }
 
+    private DefaultListModel solicitaSenhaAtendente(List<String> listServico, String atendente) {
+        DefaultListModel model = new DefaultListModel();
+        for (String senha : listServico) {
+            if (senha.split(";")[0].equals(atendente)) {
+                model.addElement(senha.split(";")[1]);
+            }
+        }
+        return model;
+    }
 }
