@@ -57,12 +57,12 @@ public class ControladorImpl extends UnicastRemoteObject implements IControlador
         listaSenhasChamadasPref = new ArrayList<>();
         listaSenhasChamadasVip = new ArrayList<>();
         paineis = new ArrayList<>();
-        
+
         listaEstatisticas.add(listAtendentes);
         listaEstatisticas.add(listaSenhasChamadasConv);
         listaEstatisticas.add(listaSenhasChamadasPref);
         listaEstatisticas.add(listaSenhasChamadasVip);
-        
+
         listaSenhas.add(listaSenhasConvencional);
         listaSenhas.add(listaSenhasPreferencial);
         listaSenhas.add(listaSenhasVIP);
@@ -214,18 +214,6 @@ public class ControladorImpl extends UnicastRemoteObject implements IControlador
         paineis.add(callback);
         System.out.println("Painel registrado.");
         return listaSenhasChamadas;
-    }
-
-    public List<String> getListaSenhasChamadasConv() {
-        return listaSenhasChamadasConv;
-    }
-
-    public List<String> getListaSenhasChamadasPref() {
-        return listaSenhasChamadasPref;
-    }
-
-    public List<String> getListaSenhasChamadasVip() {
-        return listaSenhasChamadasVip;
     }
 
     @Override
