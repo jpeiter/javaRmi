@@ -34,23 +34,12 @@ public class ControladorImpl extends UnicastRemoteObject implements IControlador
     private List<String> listaSenhasChamadasConv;
     private List<String> listaSenhasChamadasPref;
     private List<String> listaSenhasChamadasVip;
+    private List<List> listaEstatisticas;
     private List<ICallbackPainel> paineis;
 
     private IAtendente atendente;
 
     private int contadorConvencional = 1, contadorPreferencial = 1, contadorVIP = 1;
-
-    public List<String> getListaSenhasConvencional() {
-        return listaSenhasConvencional;
-    }
-
-    public List<String> getListaSenhasPreferencial() {
-        return listaSenhasPreferencial;
-    }
-
-    public List<String> getListaSenhasVIP() {
-        return listaSenhasVIP;
-    }
 
     public ControladorImpl(Registry registry) throws RemoteException {
         super();
@@ -59,17 +48,21 @@ public class ControladorImpl extends UnicastRemoteObject implements IControlador
         listAtendentes = new ArrayList<>();
         listPaineis = new ArrayList<>();
         listaSenhas = new ArrayList<>();
-
         listaSenhasConvencional = new ArrayList<>();
         listaSenhasPreferencial = new ArrayList<>();
         listaSenhasVIP = new ArrayList<>();
-
+        listaEstatisticas = new ArrayList<>();
         listaSenhasChamadas = new ArrayList<>();
         listaSenhasChamadasConv = new ArrayList<>();
         listaSenhasChamadasPref = new ArrayList<>();
         listaSenhasChamadasVip = new ArrayList<>();
         paineis = new ArrayList<>();
-
+        
+        listaEstatisticas.add(listAtendentes);
+        listaEstatisticas.add(listaSenhasChamadasConv);
+        listaEstatisticas.add(listaSenhasChamadasPref);
+        listaEstatisticas.add(listaSenhasChamadasVip);
+        
         listaSenhas.add(listaSenhasConvencional);
         listaSenhas.add(listaSenhasPreferencial);
         listaSenhas.add(listaSenhasVIP);
@@ -83,14 +76,14 @@ public class ControladorImpl extends UnicastRemoteObject implements IControlador
             listaSenhasConvencional.add(sb.toString());
             for (String nome : listAtendentes) {
                 IAtendente atendente = (IAtendente) registry.lookup("Atendente " + nome);
-                atendente.atualizarTamanhoFila("CONV", listaSenhasConvencional.size());
+                atendente.atualizarTamanhoFila("Convencional", listaSenhasConvencional.size());
             }
         } else if (servico.equals("Preferencial")) {
             sb.append(servico.charAt(0)).append(contadorPreferencial++);
             listaSenhasPreferencial.add(sb.toString());
             for (String nome : listAtendentes) {
                 IAtendente atendente = (IAtendente) registry.lookup("Atendente " + nome);
-                atendente.atualizarTamanhoFila("PREF", listaSenhasPreferencial.size());
+                atendente.atualizarTamanhoFila("Preferencial", listaSenhasPreferencial.size());
             }
         } else if (servico.equals("VIP")) {
             sb.append(servico.charAt(0)).append(contadorVIP++);
@@ -222,4 +215,22 @@ public class ControladorImpl extends UnicastRemoteObject implements IControlador
         System.out.println("Painel registrado.");
         return listaSenhasChamadas;
     }
+
+    public List<String> getListaSenhasChamadasConv() {
+        return listaSenhasChamadasConv;
+    }
+
+    public List<String> getListaSenhasChamadasPref() {
+        return listaSenhasChamadasPref;
+    }
+
+    public List<String> getListaSenhasChamadasVip() {
+        return listaSenhasChamadasVip;
+    }
+
+    @Override
+    public List<List> solicitarEstatisticas() throws RemoteException {
+        return listaEstatisticas;
+    }
+
 }

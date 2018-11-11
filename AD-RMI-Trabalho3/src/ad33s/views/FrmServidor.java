@@ -12,9 +12,11 @@ public class FrmServidor extends javax.swing.JFrame {
     /**
      * Creates new form FrmServidor
      */
+    private Servidor server;
+
     public FrmServidor() {
         initComponents();
-        Servidor server = new Servidor(1053);
+        server = new Servidor(1053);
         server.iniciar();
         this.setLocationRelativeTo(null);
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -36,6 +38,7 @@ public class FrmServidor extends javax.swing.JFrame {
         menuAtendente = new javax.swing.JMenuItem();
         menuPainel = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -53,7 +56,7 @@ public class FrmServidor extends javax.swing.JFrame {
         jMenu2.setText("Iniciar");
 
         menuGuiche.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_G, java.awt.event.InputEvent.CTRL_MASK));
-        menuGuiche.setText("Guichê");
+        menuGuiche.setText("Guichê...");
         menuGuiche.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuGuicheActionPerformed(evt);
@@ -62,7 +65,7 @@ public class FrmServidor extends javax.swing.JFrame {
         jMenu2.add(menuGuiche);
 
         menuAtendente.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.CTRL_MASK));
-        menuAtendente.setText("Atendente");
+        menuAtendente.setText("Atendente...");
         menuAtendente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuAtendenteActionPerformed(evt);
@@ -71,7 +74,7 @@ public class FrmServidor extends javax.swing.JFrame {
         jMenu2.add(menuAtendente);
 
         menuPainel.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.CTRL_MASK));
-        menuPainel.setText("Painel de Senhas");
+        menuPainel.setText("Painel de Senhas...");
         menuPainel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuPainelActionPerformed(evt);
@@ -81,7 +84,17 @@ public class FrmServidor extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu2);
 
-        jMenu1.setText("Estatísticas");
+        jMenu1.setText("Visualizar");
+
+        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem1.setText("Estatísticas...");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem1);
+
         jMenuBar1.add(jMenu1);
 
         setJMenuBar(jMenuBar1);
@@ -114,6 +127,11 @@ public class FrmServidor extends javax.swing.JFrame {
         FrmPainel frm = new FrmPainel();
         frm.setVisible(true);
     }//GEN-LAST:event_menuPainelActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        DlgEstatisticas dlg = new DlgEstatisticas(this, true);
+        dlg.setVisible(true);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -155,6 +173,7 @@ public class FrmServidor extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem menuAtendente;
     private javax.swing.JMenuItem menuGuiche;
     private javax.swing.JMenuItem menuPainel;
