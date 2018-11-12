@@ -202,8 +202,7 @@ public class FrmGuiche extends javax.swing.JFrame {
             String senha = controlador.solicitarSenha(new Guiche().getSERVICOS()[numeroServico]);
             JOptionPane.showMessageDialog(null, "Sua senha é: " + senha);
         } catch (RemoteException | NotBoundException ex) {
-            JOptionPane.showMessageDialog(null, "Erro " + ex.getMessage());
-            ex.printStackTrace();
+            System.out.println(ex);
         }
     }
 

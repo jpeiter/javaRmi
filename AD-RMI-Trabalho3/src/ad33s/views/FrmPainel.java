@@ -8,7 +8,6 @@ package ad33s.views;
 import ad33s.impl.CallbackPainelImpl;
 import ad33s.interfaces.ICallbackPainel;
 import ad33s.interfaces.IControlador;
-import java.awt.event.WindowListener;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -177,6 +176,7 @@ public class FrmPainel extends javax.swing.JFrame {
         jLabel2.setText("SENHAS CHAMADAS");
 
         lstChamadas.setBackground(new java.awt.Color(0, 0, 0));
+        lstChamadas.setFont(new java.awt.Font("Tahoma", 0, 50)); // NOI18N
         lstChamadas.setForeground(new java.awt.Color(255, 0, 0));
         jScrollPane1.setViewportView(lstChamadas);
 
@@ -265,11 +265,13 @@ public class FrmPainel extends javax.swing.JFrame {
     private javax.swing.JLabel lblSenhaAtual;
     private javax.swing.JList<String> lstChamadas;
     // End of variables declaration//GEN-END:variables
-
     public void atualizarPainel(String senha, String nomeAtendente) {
         lblSenhaAtual.setText(senha);
         lblAtendente.setText(nomeAtendente);
         senhasChamadas.addElement(senha);
         lstChamadas.setModel(senhasChamadas);
+        if ((lstChamadas.getModel().getSize() - 1) >= 0) {
+            lstChamadas.ensureIndexIsVisible((lstChamadas.getModel().getSize() - 1));
+        }
     }
 }

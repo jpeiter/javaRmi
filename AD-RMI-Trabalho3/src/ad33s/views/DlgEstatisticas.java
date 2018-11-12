@@ -8,7 +8,6 @@ import java.rmi.registry.Registry;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -19,10 +18,8 @@ public class DlgEstatisticas extends javax.swing.JDialog {
     /**
      * Creates new form DlgEstatisticas
      */
-    private DefaultComboBoxModel cmbModel;
     private IControlador controlador;
     private List<List> listaEstatisticas;
-//    private DefaultListModel listModel;
     private List<String> atendentes;
     private List<String> convChamadas;
     private List<String> prefChamadas;
@@ -31,9 +28,6 @@ public class DlgEstatisticas extends javax.swing.JDialog {
     public DlgEstatisticas(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-
-        cmbModel = new DefaultComboBoxModel();
-//        listModel = new DefaultListModel();
 
         try {
             Registry registro = LocateRegistry.getRegistry(1053);
@@ -81,6 +75,7 @@ public class DlgEstatisticas extends javax.swing.JDialog {
         jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Senhas chamadas por atendente");
 
         jScrollPane1.setViewportView(lstConvencional);
 
@@ -248,6 +243,7 @@ public class DlgEstatisticas extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void carregarAtendentes() {
+        DefaultComboBoxModel cmbModel = new DefaultComboBoxModel();
         for (String atendente : atendentes) {
             cmbModel.addElement(atendente);
         }
@@ -255,12 +251,12 @@ public class DlgEstatisticas extends javax.swing.JDialog {
     }
 
     private DefaultListModel solicitaSenhaAtendente(List<String> listServico, String atendente) {
-        DefaultListModel model = new DefaultListModel();
+        DefaultListModel listModel = new DefaultListModel();
         for (String senha : listServico) {
             if (senha.split(";")[0].equals(atendente)) {
-                model.addElement(senha.split(";")[1]);
+                listModel.addElement(senha.split(";")[1]);
             }
         }
-        return model;
+        return listModel;
     }
 }

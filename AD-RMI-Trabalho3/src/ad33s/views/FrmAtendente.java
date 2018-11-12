@@ -8,6 +8,7 @@ package ad33s.views;
 import ad33s.impl.CallbackAtendenteImpl;
 import ad33s.interfaces.ICallbackAtendente;
 import ad33s.interfaces.IControlador;
+import ad33s.model.Guiche;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -31,9 +32,8 @@ public class FrmAtendente extends javax.swing.JFrame {
 
     public FrmAtendente() {
         initComponents();
-        //Pedir o nome do atendente e setar no "lblAtendente"
-        nomeAtendente = JOptionPane.showInputDialog(null, "Nome do atendente", "Atendente", JOptionPane.INFORMATION_MESSAGE);
 
+        nomeAtendente = JOptionPane.showInputDialog(null, "Nome do atendente", "Atendente", JOptionPane.INFORMATION_MESSAGE).replace(";", "");
         try {
             Registry registro = LocateRegistry.getRegistry(1053);
             controlador = (IControlador) registro.lookup("Controlador");
@@ -250,15 +250,15 @@ public class FrmAtendente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSenhaConvencionalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSenhaConvencionalActionPerformed
-        atendeSenha("Convencional");
+        atendeSenha(new Guiche().getSERVICOS()[0]);
     }//GEN-LAST:event_btnSenhaConvencionalActionPerformed
 
     private void btnSenhaPreferencialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSenhaPreferencialActionPerformed
-        atendeSenha("Preferencial");
+        atendeSenha(new Guiche().getSERVICOS()[1]);
     }//GEN-LAST:event_btnSenhaPreferencialActionPerformed
 
     private void btnSenhaVIPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSenhaVIPActionPerformed
-        atendeSenha("VIP");
+        atendeSenha(new Guiche().getSERVICOS()[2]);
     }//GEN-LAST:event_btnSenhaVIPActionPerformed
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
@@ -321,12 +321,9 @@ public class FrmAtendente extends javax.swing.JFrame {
 
     private void atendeSenha(String servico) {
         try {
-
             tamanhoFila = controlador.atenderSenha(servico, nomeAtendente);
 
-            if (tamanhoFila >= 0) {
-                atualizaTamanhoFila(servico, tamanhoFila);
-            } else {
+            if (tamanhoFila < 0) {
                 JOptionPane.showMessageDialog(null, "Não há mais senhas há serem chamadas!");
             }
         } catch (RemoteException ex) {
