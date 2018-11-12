@@ -1,6 +1,6 @@
 
 
-# Jean Felipe Peiter e João Antonio de Oliveia
+# Jean Felipe Peiter e João Antonio de Oliveira
   
 O sistema é iniciado pelo FrmServidor, onde no menu de Iniciar > Painel (Ctrl + P), é iniciado um painel para mostrar as senhas futuramente chamadas e seus respectivos atendentes, e um histórico da senhas que foram chamadas anteriormente.
   
